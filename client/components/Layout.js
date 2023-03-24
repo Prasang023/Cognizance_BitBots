@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import First from "./Frontpages/First";
 import Second from "./Frontpages/Second";
+import Form from "./Form";
 // import { useSelector } from "react-redux";
 // import { useAccount } from "wagmi";
 // import { useRouter } from "next/router";
@@ -19,6 +20,8 @@ const Layout = ({ children }) => {
       <First/>
       <Second/>
       <Footer/>
+      <Form />
+      
       {/* {navbarMobile ? null : (
         <>
           {address || urlpath === "/" || urlpath === "/about" ? (

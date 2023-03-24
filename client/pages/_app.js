@@ -3,7 +3,7 @@
 // import "@/styles/footer.css";
 import "@/styles/globals.css";
 import "@/styles/index.scss";
-// import "@/styles/mintform.css";
+import "../styles/component/layout/mintform.scss";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { wrapper } from "../redux/store";
