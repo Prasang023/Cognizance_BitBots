@@ -1,10 +1,10 @@
-import { Canvas } from "@react-three/fiber";
+// import { Canvas } from "@react-three/fiber";
 // import { Inter } from "next/font/google";
 // import { Suspense } from "react";
 // import Three from "@/components/Three";
 import Layout from "@/components/Layout";
 import Help from "@/components/Help";
-// import Notification from "@/components/Notification";
+import Notification from "@/components/Notification";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export default function Home() {
           </Suspense>
         </Canvas> */}
         <Help />
-        {/* <Notification /> */}
+        <Notification />
       </Layout>
     </>
   );
