@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import First from "./Frontpages/First";
+import Second from "./Frontpages/Second";
 // import { useSelector } from "react-redux";
 // import { useAccount } from "wagmi";
 // import { useRouter } from "next/router";
@@ -12,8 +14,11 @@ const Layout = ({ children }) => {
   // const urlpath = router.pathname;
   // const { address } = useAccount();
   return (
-    <div>
+    <div className="dwar-container">
       <Navbar />
+      <First/>
+      <Second/>
+      <Footer/>
       {/* {navbarMobile ? null : (
         <>
           {address || urlpath === "/" || urlpath === "/about" ? (
@@ -22,8 +27,8 @@ const Layout = ({ children }) => {
           )}
         </>
       )} */}
-      <div>{children}</div>
-      <Footer />
+      {/* <div>{children}</div> */}
+      {/* <Footer /> */}
     </div>
   );
 };

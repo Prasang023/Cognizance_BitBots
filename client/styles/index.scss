@@ -1,0 +1,17 @@
+@import "variables";
+@import "./component/layout/index.scss";
+
+.main-dwar-body{
+    width: 100%;
+    height: fit-content;
+    min-height: 200vh;
+    position: relative;
+}
+
+
+.blue{
+    color: $blue;
+}
+.dark-blue{
+    color: $blue_dark;
+}

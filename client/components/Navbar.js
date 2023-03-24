@@ -13,6 +13,9 @@ import DL_contract_address from "../assets/contract_data/ProductsAddress.json";
 import nft_contract_address from "../assets/contract_data/nftAddress.json";
 import { addContractAddresses, saveAddressAndSigner } from "@/redux/navbar";
 
+// image
+import logo from "../assets/logo/dwar.svg";
+
 function Navbar() {
   const router = useRouter();
   const urlpath = router.pathname;
@@ -51,26 +54,27 @@ function Navbar() {
   }, [signer, dispatch]);
 
   return (
-    <div className="navbar-container">
-      <div className="logo-container">
+    <div className="dwar-navbar-container">
+      <div className="dwar-logo-container">
         <Link href="/">
           <Image
-            src=""
+            src={logo}
             width={95}
             height={95}
             style={{ borderRadius: "100%" }}
           />
         </Link>
       </div>
-      <div className="element-container">
-        <div className="list-container">
-          <li>Home</li>
-          <li>Documents</li>
-          <li>About</li>
-          <li>Help & Support</li>
+      <div className="dwar-element-container">
+        <div className="dwar-list-container">
+          <Link href="/">Home</Link>
+          <Link href="/">Documents</Link>
+          <Link href="/">About</Link>
+          <Link href="/">Help & Support</Link>
         </div>
-        <div className="btn-container">
-          <ConnectButton />
+        <div className="dwar-btn-container">
+          {/* <ConnectButton /> */}
+          <button>Connect</button>
         </div>
       </div>
     </div>

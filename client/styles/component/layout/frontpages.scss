@@ -1,0 +1,67 @@
+.dwar-first-page {
+    width: 90%;
+    padding: 15vh 5% 10vh 5%;
+    min-height: 75vh;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.dwar-second-page{
+    width: 90%;
+    padding: 10vh 5% 10vh 5%;
+    min-height: 80vh;
+    height: fit-content;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    .left{
+        width: 56%;
+        h1{
+            font-size: 80px;
+        }
+        margin: 0 2%;
+    }
+}
+.left {
+    width: 60%;
+    min-height: 80vh;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    // margin: 0 5px;
+    font-family: $poppins;
+    h1 {
+        font-size: 100px;
+    }
+    p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: $montes;
+        font-weight: 300;
+        margin-top: 20px;
+    }
+    button {
+        margin-top: 40px;
+        width: 150px;
+        height: 40px;
+        border-radius: 20px;
+        background: transparent;
+        border: 2px solid $blue;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            background: $blue;
+        }
+    }
+}
+
+.right{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
