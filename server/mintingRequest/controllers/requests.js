@@ -13,7 +13,6 @@ const makeRequest = async (req, res) => {
 
 
         // check retailer
-
         const [product_id] = await fetch_product_id({ qr_id });
         console.log("product_id: ", product_id);
 
