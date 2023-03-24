@@ -118,11 +118,13 @@
         justify-content: flex-start;
         align-items: flex-end;
         .dwar-notification-box-close{
+            margin-bottom: 20px;
             width: 100%;
             height: 30px;
             padding: 10px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             color: $dark;
             .icons{
                 cursor: pointer;
@@ -131,6 +133,15 @@
                 &:hover{
                     fill: $dark;
                 }
+            }
+            p{
+                font-size: 16px;
+                color: $dark;
+                padding: 0;
+                margin-left: 30px;
+                font-family: $quicks;
+                color: #00000093;
+                font-weight: 500;
             }
         }
         .dwar-notification-box-list{
@@ -143,13 +154,13 @@
             align-items: center;
             flex-direction: column;
             .dwar-notification-box-list-item{
-                width: 90%;
+                width: 92%;
                 height: fit-content;
                 padding: 10px;
                 color: $dark;
                 margin: 5px 0;
                 border: 2px solid #3385f929;
-                border-radius: 20px;
+                border-radius: 10px;
                 transition: all 0.3s ease;
                 cursor: pointer;
                 &:hover{

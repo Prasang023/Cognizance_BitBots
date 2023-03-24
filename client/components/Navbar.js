@@ -63,6 +63,7 @@ function Navbar() {
       <div className="dwar-notification-container" id="dwar-notification">
         <div className="dwar-notification-box">
           <div className="dwar-notification-box-close">
+            <p>Notifications</p>
             <FaRegTimesCircle
               size={20}
               className="icons"
