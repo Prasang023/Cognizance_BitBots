@@ -16,9 +16,11 @@ const Layout = ({ children }) => {
   return (
     <div className="dwar-container">
       <Navbar />
-      <First/>
-      <Second/>
-      <Footer/>
+
+      <>
+        <div>{children}</div>
+      </>
+      <Footer />
       {/* {navbarMobile ? null : (
         <>
           {address || urlpath === "/" || urlpath === "/about" ? (

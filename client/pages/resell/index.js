@@ -7,8 +7,8 @@ import { create } from "ipfs-http-client";
 import Success from "@/components/Success";
 import InputBox from "@/components/InputBox";
 import { useSelector, useDispatch } from "react-redux";
-import nftABI from "../../assets/contract_data/nft.json";
-import nft_contract_address from "../../assets/contract_data/nftAddress.json";
+import warrantyABI from "../../assets/contract_data/warranty.json";
+import warranty_contract_address from "../../assets/contract_data/warrantyAddress.json";
 
 const project_id = "2LaElUcAr2SYK3KuPpor7Xlc5hB";
 const project_secret = "0947f1f7854b4631c685a30c20e51d4d";
@@ -32,7 +32,7 @@ function Index() {
 
   const handleClick = async () => {
     let newData;
-    
+
     newData = {
       ...newData,
       owner: data.toAddress,
@@ -64,10 +64,10 @@ function Index() {
         console.error(err.message);
       });
 
-    console.log(nft_contract_address, nftABI, signer);
+    console.log(warranty_contract_address, warrantyABI, signer);
     const contract = new ethers.Contract(
-      nft_contract_address.address,
-      nftABI.abi,
+      warranty_contract_address.address,
+      warrantyABI.abi,
       signer
     );
     setLocalLoading(true);

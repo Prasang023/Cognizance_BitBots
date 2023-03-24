@@ -2,8 +2,10 @@
 // import { Inter } from "next/font/google";
 // import { Suspense } from "react";
 // import Three from "@/components/Three";
-import Layout from "@/components/Layout";
 import Head from "next/head";
+import Layout from "@/components/Layout";
+import First from "@/components/Frontpages/First";
+import Second from "@/components/Frontpages/Second";
 // import Notification from "@/components/Notification";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -18,7 +20,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="main-dwar-body">
-        <Layout></Layout>
+        <Layout>
+          <First />
+          <Second />
+        </Layout>
       </div>
       {/* <Layout>
         <Canvas id="three-canvas-container">
