@@ -1,0 +1,48 @@
+.navbar-container {
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  padding: 15px;
+  color: azure;
+  /* position: fixed; */
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.element-container {
+  display: flex;
+}
+.list-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list-container li {
+  list-style: none;
+  margin: 2px 12px;
+  padding: 15px 10px;
+  font-size: large;
+}
+
+.list-container li::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 3px;
+  background: #03238d;
+  transition: width 0.3s;
+}
+
+.list-container li:hover::after {
+  width: 100%;
+}
+
+.list-container li:hover {
+  cursor: pointer;
+}
+
+.btn-container {
+  padding: 12px;
+  margin: 0px 12px 0 0;
+}
