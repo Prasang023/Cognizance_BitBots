@@ -4,6 +4,7 @@ import cors from "cors"
 import log from "./log.js"
 import { port } from "./config.js"
 import auth from "./auth/routes/index.js"
+import product from "./product/routes/index.js"
 import requests from "./mintingRequest/routes/index.js"
 
 const app = express()
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 })
 
 app.use('/auth', auth);
+app.use('/product', product);
 app.use('/requests', requests);
 
 app.listen(port, () => {
