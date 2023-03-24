@@ -4,8 +4,8 @@ import { productDetailsDb, productManuDb, productManuStatusUp, productMapingDb }
 import QRCode from 'qrcode';
 
 const productDetails = async (req, res) => {
-    let {manufactererId, name, details, image, warrantyTime} = req.body;
-    
+    let { manufactererId, name, details, image, warrantyTime } = req.body;
+
     const validationError = validationResult(req);
 
     if (!validationError.isEmpty()) {
@@ -40,14 +40,14 @@ const productDetails = async (req, res) => {
     } catch (err) {
         log.error({ err }, '[productDetails][error]')
 
-        return res.status(500).json({ 
+        return res.status(500).json({
             message: 'INTERNAL SERVER ERROR',
             error: err.message
         })
     }
 }
 
-const isProductRetailer = async(req, res) => {
+const isProductRetailer = async (req, res) => {
     const validationError = validationResult(req);
 
     if (!validationError.isEmpty()) {
@@ -77,40 +77,40 @@ const isProductRetailer = async(req, res) => {
     } catch (err) {
         log.error({ err }, '[productDetails][error]')
 
-        return res.status(500).json({ 
+        return res.status(500).json({
             message: 'INTERNAL SERVER ERROR',
             error: err.message
-        })   
+        })
     }
 }
 
-const productManufacture = async(req, res) => {
+const productManufacture = async (req, res) => {
     const validationError = validationResult(req);
-    
+
     if (!validationError.isEmpty()) {
         return res.status(400).json({
             message: 'Bad Request',
             error: validationError
         })
     }
-    
+
     let { productId, qrId, status, ipfs } = req.body;
-    
+
     try {
         const [c] = await productManuDb({ productId, qrId, status, ipfs });
-        
+
         let stringdata = JSON.stringify(qrId);
-        
+
         //getting qr code from the qrdata by calling function
         QRCode.toDataURL(stringdata, function (error, code) {
-            if(error) {
+            if (error) {
                 console.log("error occurred")
                 return res.status(500).json({
                     message: 'INTERNAL SERVER ERROR',
                     error: error.message
                 })
             }
-            
+
             // Printing the code
             console.log(code)
             return res.status(200).json({
@@ -119,32 +119,32 @@ const productManufacture = async(req, res) => {
                 image: code
             })
         })
-        
+
     } catch (err) {
         log.error({ err }, '[productDetails][error]')
-        
-        return res.status(500).json({ 
+
+        return res.status(500).json({
             message: 'INTERNAL SERVER ERROR',
             error: err.message
         })
     }
 }
 
-const updateProductStatus = async(req, res) => {
+const updateProductStatus = async (req, res) => {
     const validationError = validationResult(req);
-    
+
     if (!validationError.isEmpty()) {
         return res.status(400).json({
             message: 'Bad Request',
             error: validationError
         })
     }
-    
+
     const { ipfs, status, qrId } = req.body;
-    
+
     try {
         const [c] = await productManuStatusUp({ ipfs, status, qrId });
-        
+
         return res.status(200).json({
             message: 'Success',
             reponse: {
@@ -155,7 +155,7 @@ const updateProductStatus = async(req, res) => {
         log.error({ err }, '[productDetails][error]');
 
         let status = err.message.toLowerCase().includes('cannot read properties of undefined') ? `QR id doesn't exsists!` : err.message;
-        
+
         if (status === `QR id doesn't exsists!`) {
             return res.status(400).json({
                 message: 'Invalid Input',
@@ -163,11 +163,41 @@ const updateProductStatus = async(req, res) => {
             })
         }
 
-        return res.status(500).json({ 
+        return res.status(500).json({
             message: 'INTERNAL SERVER ERROR',
             error: err.message
         })
     }
 }
 
-export {productDetails, isProductRetailer, productManufacture, updateProductStatus};
+const QRgenerator = async (req, res) => {
+    const { qrId } = req.body;
+
+    try {
+        let stringdata = JSON.stringify(qrId);
+
+        //getting qr code from the qrdata by calling function
+        QRCode.toDataURL(stringdata, function (error, code) {
+            if (error) {
+                console.log("error occurred")
+                return res.status(500).json({
+                    message: 'INTERNAL SERVER ERROR',
+                    error: error.message
+                })
+            }
+
+            // Printing the code
+            return res.status(200).json({
+                message: 'success',
+                image: code
+            })
+        })
+    } catch (err) {
+        return res.status(500).json({
+            message: 'INTERNAL SERVER ERROR',
+            error: err.message
+        })
+    }
+}
+
+export { productDetails, isProductRetailer, productManufacture, updateProductStatus, QRgenerator };
