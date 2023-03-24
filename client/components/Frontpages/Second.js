@@ -1,15 +1,5 @@
 import React from "react";
-import Lottie from "react-lottie";
-import helloJSON from "../../assets/lottie/hello.json";
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: helloJSON,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
+import LottieCard from "../LottieCard";
 
 function Second() {
   return (
@@ -43,7 +33,7 @@ function Second() {
         <button>Need Help ?</button>
       </div>
       <div className="right">
-        <Lottie options={defaultOptions} height="auto" width="90%" />
+        <LottieCard width="90%" src="https://assets7.lottiefiles.com/packages/lf20_9xrenieu.json" />
       </div>
     </div>
   );
