@@ -1,15 +1,5 @@
 import React from "react";
-import Lottie from "react-lottie";
-import cubeJSON from "../../assets/lottie/cube.json";
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: cubeJSON,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
+import LottieCard from "../LottieCard";
 
 function First() {
   return (
@@ -29,7 +19,7 @@ function First() {
         <button>Explore</button>
       </div>
       <div className="right">
-        <Lottie options={defaultOptions} height="auto" width="80%" />
+        <LottieCard width="80%" src="https://assets7.lottiefiles.com/packages/lf20_kndsasgl.json"/>
       </div>
     </div>
   );
