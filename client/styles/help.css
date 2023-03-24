@@ -1,0 +1,31 @@
+.help-container {
+  margin: 0;
+  padding: 0;
+  color: white;
+  z-index: 0.1;
+  background-color: transparent;
+}
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.help-list-container {
+  display: flex;
+}
+
+.help-list-container li {
+  list-style: none;
+  font-size: 16px;
+}
+
+.help li {
+  margin: 12px;
+  padding: 12px;
+}
+
+.support li {
+  margin: 12px;
+  padding: 12px;
+}
