@@ -1,0 +1,35 @@
+.fContainer {
+  bottom: 0%;
+  width: 100%;
+  z-index: 1;
+  /* position: fixed; */
+  background-color: transparent;
+}
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: whitesmoke;
+  padding: 20px;
+}
+
+.content-container {
+  display: flex;
+}
+
+.content-container li {
+  list-style: none;
+  margin: 0px 10px;
+  padding: 15px;
+  font-size: 16px;
+}
+
+.media-container {
+  display: flex;
+  padding: 18px;
+  margin: 0px 12px;
+}
+
+.media-container p {
+  margin: 0px 10px;
+}
