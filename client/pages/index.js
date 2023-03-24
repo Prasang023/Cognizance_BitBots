@@ -3,7 +3,6 @@
 // import { Suspense } from "react";
 // import Three from "@/components/Three";
 import Layout from "@/components/Layout";
-import Help from "@/components/Help";
 import Head from "next/head";
 // import Notification from "@/components/Notification";
 
