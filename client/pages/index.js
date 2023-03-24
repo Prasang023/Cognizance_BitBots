@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+// import { Canvas } from "@react-three/fiber";
 // import { Inter } from "next/font/google";
 // import { Suspense } from "react";
 // import Three from "@/components/Three";
@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="main-dwar-body">
-          <Layout></Layout>
+        <Layout></Layout>
       </div>
       {/* <Layout>
         <Canvas id="three-canvas-container">

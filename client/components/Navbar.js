@@ -12,6 +12,7 @@ import nftAbi from "../assets/contract_data/nft.json";
 import DL_contract_address from "../assets/contract_data/ProductsAddress.json";
 import nft_contract_address from "../assets/contract_data/nftAddress.json";
 import { addContractAddresses, saveAddressAndSigner } from "@/redux/navbar";
+import { ConnectWallet } from "./CustomConnect";
 
 // image
 import logo from "../assets/logo/dwar.svg";
@@ -74,7 +75,7 @@ function Navbar() {
         </div>
         <div className="dwar-btn-container">
           {/* <ConnectButton /> */}
-          <button>Connect</button>
+          <ConnectWallet />
         </div>
       </div>
     </div>

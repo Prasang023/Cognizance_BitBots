@@ -7,6 +7,7 @@ import {
   Scene,
   TextureLoader,
 } from "three";
+
 import lenflare0 from "../assets/lensflare0.png";
 import lenflare3 from "../assets/lensflare3.png";
 import {
