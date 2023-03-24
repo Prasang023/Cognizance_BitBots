@@ -1,0 +1,46 @@
+.fContainer {
+    bottom: 0;
+    width: 100%;
+    background-color: $dark_light;
+    margin-top: 50px;
+}
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $white;
+    padding: 20px;
+    margin: 0 12px 0 5%;
+}
+
+.content-container {
+    display: flex;
+}
+.footer-container p{
+    margin: 0px 10px;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: $montes;
+}
+.footer-container a{
+    text-decoration: none;
+    &.second{
+        margin-left: 30px;
+    }
+    font-size: 16px;
+    font-weight: 300;
+    color: $white;
+    font-family: $montes;
+}
+.media-container {
+    display: flex;
+    padding: 18px;
+    margin: 0 5% 0 12px;
+}
+.media-container span{
+    margin-left: 5px;
+    font-weight: 600;
+    span{
+        color: $blue_dark;
+    }
+}

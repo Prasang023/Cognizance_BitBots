@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 // import Three from "@/components/Three";
 import Layout from "@/components/Layout";
 import Help from "@/components/Help";
+import Head from "next/head";
 // import Notification from "@/components/Notification";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -11,15 +12,24 @@ import Help from "@/components/Help";
 export default function Home() {
   return (
     <>
-      <Layout>
-        {/* <Canvas id="three-canvas-container">
+      <Head>
+        <title>DWAR</title>
+        <meta name="description" content="Hello this side DWAR App." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className="main-dwar-body">
+          <Layout></Layout>
+      </div>
+      {/* <Layout>
+        <Canvas id="three-canvas-container">
           <Suspense fallback={null}>
             <Three id="three-cont" />
           </Suspense>
-        </Canvas> */}
+        </Canvas>
         <Help />
-        {/* <Notification /> */}
-      </Layout>
+        <Notification />
+      </Layout> */}
     </>
   );
 }
