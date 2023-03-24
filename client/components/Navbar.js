@@ -12,7 +12,9 @@ import nftAbi from "../assets/contract_data/nft.json";
 import DL_contract_address from "../assets/contract_data/ProductsAddress.json";
 import nft_contract_address from "../assets/contract_data/nftAddress.json";
 import { addContractAddresses, saveAddressAndSigner } from "@/redux/navbar";
-import { ConnectWallet } from "./CustomConnect";
+
+// icons
+import { FaRegBell, FaRegTimesCircle } from "react-icons/fa";
 
 // image
 import logo from "../assets/logo/dwar.svg";
@@ -54,31 +56,70 @@ function Navbar() {
       : null;
   }, [signer, dispatch]);
 
+  const notifications = ['hello hetu'];
+
   return (
-    <div className="dwar-navbar-container">
-      <div className="dwar-logo-container">
-        <Link href="/">
-          <Image
-            src={logo}
-            width={95}
-            height={95}
-            style={{ borderRadius: "100%" }}
-          />
-        </Link>
-      </div>
-      <div className="dwar-element-container">
-        <div className="dwar-list-container">
-          <Link href="/">Home</Link>
-          <Link href="/">Documents</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Help & Support</Link>
+    <>
+      <div className="dwar-notification-container" id="dwar-notification">
+        <div className="dwar-notification-box">
+          <div className="dwar-notification-box-close">
+            <p>Notifications</p>
+            <FaRegTimesCircle
+              size={20}
+              className="icons"
+              onClick={() => {
+                const ele = document.getElementById("dwar-notification");
+                ele.style.opacity = 0;
+                ele.style.zIndex = -1000;
+              }}
+            />
+          </div>
+          <div className="dwar-notification-box-list">
+            {notifications.map((e, index) => {
+              return (
+                <div className="dwar-notification-box-list-item" key={`dwar-notification-box-list-item-${index}`}>
+                  {e}
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div className="dwar-btn-container">
-          {/* <ConnectButton /> */}
-          <ConnectWallet />
+      </div>
+      <div className="dwar-navbar-container">
+        <div className="dwar-logo-container">
+          <Link href="/">
+            <Image
+              src={logo}
+              width={95}
+              height={95}
+              style={{ borderRadius: "100%" }}
+            />
+          </Link>
+        </div>
+        <div className="dwar-element-container">
+          <div className="dwar-list-container">
+            <Link href="/">Home</Link>
+            <Link href="/">Documents</Link>
+            <Link href="/">About</Link>
+            <Link href="/">Help & Support</Link>
+          </div>
+          <div className="dwar-btn-container">
+            {/* <ConnectButton /> */}
+            <button>Connect</button>
+            <div
+              className="dwar-notification"
+              onClick={() => {
+                const ele = document.getElementById("dwar-notification");
+                ele.style.opacity = 1;
+                ele.style.zIndex = 1000;
+              }}
+            >
+              <FaRegBell size={16} className="icons" />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
