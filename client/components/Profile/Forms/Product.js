@@ -99,10 +99,10 @@ function Product() {
   return (
     <div className="dwar-form-container">
       {qrData ? (
-        <>
+        <div className="output-qr">
           <img src={qrData} />
           <button onClick={downloadPNG}>Download</button>
-        </>
+        </div>
       ) : (
         <div className="dwar-form-main">
           <div className="txt">

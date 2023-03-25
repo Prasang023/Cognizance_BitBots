@@ -7,6 +7,35 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    .output-qr {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 300px;
+            height: 300px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        button {
+            width: fit-content;
+            height: fit-content;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background-color: $dark;
+            color: $font-light;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover {
+                color: $white;
+            }
+        }
+    }
 }
 
 .dwar-form-main {
@@ -36,13 +65,13 @@
         height: fit-content;
         display: flex;
         flex-direction: column;
-        .inputBox{
+        .inputBox {
             max-width: 100%;
             min-width: 100%;
             outline: none;
             border: none;
         }
-        p{
+        p {
             font-size: 16px;
             font-family: $poppins;
             font-weight: 400;
@@ -55,21 +84,21 @@
                 color: $font-light;
             }
         }
-        .inputBox{
+        .inputBox {
             border: none;
             outline: none;
             background-color: $card;
             color: $font-light;
         }
     }
-    .form-submit{
+    .form-submit {
         width: 100%;
         height: fit-content;
         margin: 10px 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        .form-submit-button{
+        .form-submit-button {
             width: fit-content;
             height: 40px;
             padding: 5px 30px;
@@ -78,11 +107,12 @@
             text-align: center;
             outline: none;
             cursor: pointer;
-            border: 2px solid $blue;
-            background: transparent;
+            // border: 2px solid $blue;
+            background: $dark;
             transition: all 0.3s ease;
-            &:hover{
-                background-color: $blue;
+            color: $font-light;
+            &:hover {
+                color: $white;
             }
         }
     }

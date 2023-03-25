@@ -43,7 +43,7 @@ function Scan() {
   };
 
   const handleClick = (e) => {
-    setScannedData(data.tokenID)
+    setScannedData(data.tokenID);
   };
 
   const previewStyle = {
@@ -85,11 +85,9 @@ function Scan() {
               placeholder="Enter Token ID"
             />
 
-            <div className="" style={{ textAlign: "center" }}>
-              <button className="" onClick={handleClick}>
-                "Get Product"
-              </button>
-            </div>
+            <button className="" onClick={handleClick}>
+              Get Product
+            </button>
           </div>
         ) : (
           <></>
