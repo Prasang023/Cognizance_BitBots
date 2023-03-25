@@ -58,6 +58,7 @@ export const retailerSlice = createSlice({
     }
     builder.addCase(getProductDetailsById.fulfilled, (state, action) => {
       state.loading = false
+      state.productDetail = action.payload
     })
     builder.addCase(sellProduct.fulfilled, (state, action) => {
       state.loading = false
