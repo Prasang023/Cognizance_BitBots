@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation"
 export default function Home() {
   const { userRole } = useSelector((state) => state.navbar)
   const { push } = useRouter()
-  if (userRole) {
+  if (userRole!=null) {
     push("/profile")
   }
   return (

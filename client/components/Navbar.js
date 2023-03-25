@@ -21,7 +21,7 @@ import { FaRegBell, FaRegTimesCircle } from "react-icons/fa"
 // image
 import logo from "../assets/logo/dwar.svg"
 
-function Navbar() {
+function Navbar({hide}) {
   const dispatch = useDispatch()
   const { address } = useAccount()
   const { data: signer } = useSigner()
@@ -110,7 +110,7 @@ function Navbar() {
           </div>
         </div>
       </div>
-      <div className="dwar-navbar-container">
+      <div className="dwar-navbar-container" style={hide ? { visibility: "hidden" } : { visibility: "visible" }}>
         <div className="dwar-logo-container">
           <Link href="/">
             <Image
