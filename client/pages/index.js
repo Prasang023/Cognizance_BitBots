@@ -5,7 +5,6 @@ import First from "@/components/Frontpages/First";
 import Second from "@/components/Frontpages/Second";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import Scan from "@/components/Scan";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +26,6 @@ export default function Home() {
         <Layout>
           <First />
           <Second />
-          <Scan />
         </Layout>
       </div>
     </>
