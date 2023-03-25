@@ -4,7 +4,7 @@ import Left from "@/components/Profile/Left";
 import Right from "@/components/Profile/Right";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import Navbar from "@/components/Navbar";
 import Layout from "@/components/Layout";
 import Scan from "@/components/Scan";
@@ -14,11 +14,13 @@ import { getProducts } from "@/redux/slices/customer";
 
 function profile() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { address } = useAccount();
 
   const { instances } = useSelector((state) => state.navbar);
 
   const { userRole } = useSelector((state) => state.navbar);
+  const { allProducts } = useSelector((state) => state.customer);
   useEffect(() => {
     if (userRole == null || userRole == undefined) {
       document.getElementById("demo-btn").click();
@@ -37,6 +39,16 @@ function profile() {
       setProfile(2);
     }
   }, [profile]);
+
+  const pendingProducts = allProducts.filter(
+    (p) => p[8] == address && p[9] == 1
+  );
+  const activeProducts = allProducts.filter(
+    (p) => p[8] == address && p[9] == 2
+  );
+  const expiredProducts = allProducts.filter(
+    (p) => p[8] == address && p[9] == 3
+  );
 
   const nav_items = [
     ["Add Retailer", "Add Product"],
@@ -59,64 +71,13 @@ function profile() {
   ];
 
   useEffect(() => {
-    const fetchAllProduct = async () => {
-      const product = await instances?.getProducts();
-      console.log(`Product:`, product);
-    };
-    fetchAllProduct();
+    dispatch(getProducts());
   }, [address]);
 
   const right_items = [
     [<Retailer />, <Product />],
     [<Scan />],
-    [
-      [
-        {
-          src: "",
-          heading: "one 1",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-        {
-          src: "",
-          heading: "one 2",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-        {
-          src: "",
-          heading: "one 3",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-        {
-          src: "",
-          heading: "one 4",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-      ],
-      [
-        {
-          src: "",
-          heading: "two 1",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-        {
-          src: "",
-          heading: "two 2",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-        {
-          src: "",
-          heading: "two 3",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-      ],
-      [
-        {
-          src: "",
-          heading: "three 1",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
-      ],
-    ],
+    [pendingProducts, activeProducts, expiredProducts],
   ];
   return (
     <Layout hide={true}>

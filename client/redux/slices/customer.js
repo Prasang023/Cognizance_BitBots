@@ -23,7 +23,7 @@ export const customerSlice = createSlice({
   name: "customer",
   initialState: {
     loading: false,
-    products: [],
+    allProducts: [],
     error: null,
   },
   reducers: {},
@@ -37,7 +37,7 @@ export const customerSlice = createSlice({
       state.error = action.payload;
     }
     builder.addCase(getProducts.fulfilled, (state, action) => {
-      state.retailers = action.payload;
+      state.allProducts = action.payload;
       state.loading = false;
     });
     builder.addCase(getProducts.pending, onPending);
