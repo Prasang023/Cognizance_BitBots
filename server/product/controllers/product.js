@@ -174,7 +174,7 @@ const QRgenerator = async (req, res) => {
     const { qrId } = req.body;
 
     try {
-        let qrStr = `http://localhost:3000/product${qrId}`;
+        let qrStr = `http://localhost:3000/product/${qrId}`;
         let stringdata = JSON.stringify(qrStr);
 
         //getting qr code from the qrdata by calling function
