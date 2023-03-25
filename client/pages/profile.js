@@ -11,6 +11,7 @@ import Scan from "@/components/Scan";
 import { ImCross } from "react-icons/im";
 import { useAccount } from "wagmi";
 import { getProducts } from "@/redux/slices/customer";
+import Model from "@/components/Profile/Model";
 
 function profile() {
   const router = useRouter();
@@ -78,32 +79,35 @@ function profile() {
     [pendingProducts, activeProducts, expiredProducts],
   ];
   return (
-    <Layout hide={true}>
-      <button
-        id="demo-btn"
-        onClick={(e) => {
-          router.push("/");
-        }}
-        style={{ visibility: "hidden" }}
-      >
-        Remove
-      </button>
-      <div className="main-dwar-profile-body">
-        <Left
-          setNavItem={setNavItem}
-          navItem={navItem}
-          profile={profile}
-          nav_items={nav_items}
-          profs={profs}
-        />
-        <Right
-          navItem={navItem}
-          nav_items={nav_items}
-          profile={profile}
-          right_items={right_items}
-        />
-      </div>
-    </Layout>
+    <>
+      <Layout hide={true}>
+        <Model />
+        <button
+          id="demo-btn"
+          onClick={(e) => {
+            router.push("/");
+          }}
+          style={{ visibility: "hidden" }}
+        >
+          Remove
+        </button>
+        <div className="main-dwar-profile-body">
+          <Left
+            setNavItem={setNavItem}
+            navItem={navItem}
+            profile={profile}
+            nav_items={nav_items}
+            profs={profs}
+          />
+          <Right
+            navItem={navItem}
+            nav_items={nav_items}
+            profile={profile}
+            right_items={right_items}
+          />
+        </div>
+      </Layout>
+    </>
   );
 }
 
