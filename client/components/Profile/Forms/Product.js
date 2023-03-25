@@ -128,7 +128,7 @@ function Product() {
           />
 
           <label className="inputLabel">
-            Description:
+            <p>Description :</p>
             <textarea
               className="inputBox"
               name="description"
@@ -138,18 +138,15 @@ function Product() {
               disabled={localLoading}
             />
           </label>
-          <label className="inputLabel">
-            <InputBox
-              name="expiry"
-              title="Expiry"
-              type="number"
-              value={data.expiry}
-              handleChange={handleChange}
-              placeholder="Exipry Duration (in Months)."
-              disabled={localLoading}
-            />
-          </label>
-
+          <InputBox
+            name="expiry"
+            title="Expiry"
+            type="number"
+            value={data.expiry}
+            handleChange={handleChange}
+            placeholder="Exipry Duration (in Months)."
+            disabled={localLoading}
+          />
           <div className="form-submit">
             <button className="form-submit-button" onClick={handleClick}>
               {localLoading || loading ? (
