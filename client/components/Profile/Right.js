@@ -11,7 +11,7 @@ function Right({ navItem, nav_items, profile, right_items }) {
     } else if (profile == 1) {
       return right_items[profile][navItem];
     } else {
-      return right_items[profile][navItem].map((e, index) => {
+      right_items[profile][navItem].map((e, index) => {
         return <Card data={e} />;
       });
     }
