@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from "react"
-import * as Push from "@pushprotocol/restapi"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useState, useEffect } from "react";
+import * as Push from "@pushprotocol/restapi";
+import { useDispatch, useSelector } from "react-redux";
 // import Success from "@/components/Success";
 // import Error from "@/components/Error";
-import { useSigner } from "wagmi"
-import { setSuccess } from "@/redux/slices/success"
-import { setError } from "@/redux/slices/error"
-import InputBox from "./InputBox"
-import { getProductDetailsById, sellProduct } from "@/redux/slices/retailer"
-import Image from "next/image"
-import logo from "../assets/logo/dwar.png"
+import { useSigner } from "wagmi";
+import { setSuccess } from "@/redux/slices/success";
+import { setError } from "@/redux/slices/error";
+import InputBox from "./InputBox";
+import { getProductDetailsById, sellProduct } from "@/redux/slices/retailer";
+import Image from "next/image";
+import logo from "../assets/logo/dwar.png";
 
 const statusArray = [
   "Manufactured",
   "Sold",
   "Warranty Active",
-  "Warranty Expired"
-]
+  "Warranty Expired",
+];
 
 function ProductBoard({ scannedData }) {
-  console.log("scanned Data: ", scannedData)
-  const dispatch = useDispatch()
-  const [localLoading, setLocalLoading] = useState(null)
+  console.log("scanned Data: ", scannedData);
+  const dispatch = useDispatch();
+  const [localLoading, setLocalLoading] = useState(null);
   const [data, setData] = useState({
-    recipient_address: ""
-  })
+    recipient_address: "",
+  });
 
-  const PK = process.env.CHANNEL_KEY
-  const Pkey = `0x${PK}`
-  const channelAddress = "0x7eff959E7D7fB6b9F3cDA78599966870929A7628"
+  const PK = process.env.CHANNEL_KEY;
+  const Pkey = `0x${PK}`;
+  const channelAddress = "0x7eff959E7D7fB6b9F3cDA78599966870929A7628";
 
-  const { data: signer } = useSigner(Pkey)
-  const { productDetail } = useSelector((state) => state.retailer)
+  const { data: signer } = useSigner(Pkey);
+  const { productDetail } = useSelector((state) => state.retailer);
 
   useEffect(() => {
-    dispatch(getProductDetailsById(scannedData))
-  }, [scannedData])
+    dispatch(getProductDetailsById(scannedData));
+  }, [scannedData]);
 
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value
-    })
-    console.log(data)
-  }
+      [e.target.name]: e.target.value,
+    });
+    console.log(data);
+  };
   // console.log("product details in component:", productDetail)
 
   const handleClick = async () => {
@@ -51,8 +51,8 @@ function ProductBoard({ scannedData }) {
       dispatch(sellProduct({ id: scannedData, add: data.recipient_address }))
         .unwrap()
         .then(() => {
-          dispatch(setSuccess("Product sold Successfully!"))
-        })
+          dispatch(setSuccess("Product sold Successfully!"));
+        });
 
       await Push.payloads.sendNotification({
         signer,
@@ -60,25 +60,25 @@ function ProductBoard({ scannedData }) {
         identityType: 2, //direct payloads
         notification: {
           title: "New Notification Alert",
-          body: "Message!"
+          body: "Message!",
         },
         payload: {
           title: `Pending Notification 📌`,
           body: `You have an activation request for ${scannedData}`, //tokenID
           cta: "",
-          img: ""
+          img: "",
         },
         recipients: data.recipient_address,
         channel: channelAddress,
-        env: "staging"
-      })
-      dispatch(setSuccess("Notification Sent"))
-      setData({ recipient_address: "" })
+        env: "staging",
+      });
+      dispatch(setSuccess("Notification Sent"));
+      setData({ recipient_address: "" });
     } catch (error) {
-      setData({ recipient_address: "" })
-      dispatch(setError("Unable to notify !", error.message))
+      setData({ recipient_address: "" });
+      dispatch(setError("Unable to notify !", error.message));
     }
-  }
+  };
   return (
     <div className="product-detail-box">
       <div className="photo">
@@ -114,21 +114,23 @@ function ProductBoard({ scannedData }) {
       </div>
       {productDetail && productDetail[9] == 0 ? (
         <>
-          <InputBox
-            name="recipient_address"
-            title="Enter the Recipient Address"
-            value={data.recipient_address}
-            handleChange={handleChange}
-            placeholder="Recipient 0x...."
-            disabled={localLoading}
-          />
+          <div className="box">
+            <InputBox
+              name="recipient_address"
+              title="Enter the Recipient Address"
+              value={data.recipient_address}
+              handleChange={handleChange}
+              placeholder="Recipient 0x...."
+              disabled={localLoading}
+            />
+          </div>
           <div className="box button" onClick={handleClick}>
             <p>Sell Product</p>
           </div>
         </>
       ) : null}
     </div>
-  )
+  );
 }
 
-export default ProductBoard
+export default ProductBoard;
