@@ -14,7 +14,7 @@ const InputBox = ({
     <>
       <label className={doHalf ? "inputLabelHalf" : "inputLabel"}>
         <p>
-          {title}:<span className="inputDescription">{titleDescription}</span>
+          {title} :<span className="inputDescription">{titleDescription}</span>
         </p>
         <input
           className={doHalf ? "inputBoxHalf" : "inputBox"}
