@@ -2,18 +2,24 @@ import Product from "@/components/Profile/Forms/Product"
 import Retailer from "@/components/Profile/Forms/Retailer"
 import Left from "@/components/Profile/Left"
 import Right from "@/components/Profile/Right"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSelector } from "react-redux"
+import Navbar from "@/components/Navbar"
+import Layout from "@/components/Layout"
 
 function profile() {
   const { push } = useRouter()
   const { userRole } = useSelector((state) => state.navbar)
-  if (!userRole) {
+  if (userRole == null) {
     push("/")
   }
   const [navItem, setNavItem] = useState(0)
   const [profile, setProfile] = useState(userRole)
+  useEffect(() => {
+    setProfile(userRole)
+  }, [userRole])
+
   const nav_items = [
     ["Add Retailer", "Add Product"],
     ["Sell Product"],
@@ -86,21 +92,23 @@ function profile() {
     ]
   ]
   return (
-    <div className="main-dwar-profile-body">
-      <Left
-        setNavItem={setNavItem}
-        navItem={navItem}
-        profile={profile}
-        nav_items={nav_items}
-        profs={profs}
-      />
-      <Right
-        navItem={navItem}
-        nav_items={nav_items}
-        profile={profile}
-        right_items={right_items}
-      />
-    </div>
+    <Layout hide={true}>
+      <div className="main-dwar-profile-body">
+        <Left
+          setNavItem={setNavItem}
+          navItem={navItem}
+          profile={profile}
+          nav_items={nav_items}
+          profs={profs}
+        />
+        <Right
+          navItem={navItem}
+          nav_items={nav_items}
+          profile={profile}
+          right_items={right_items}
+        />
+      </div>
+    </Layout>
   )
 }
 

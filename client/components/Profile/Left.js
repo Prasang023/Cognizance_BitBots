@@ -11,7 +11,10 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
 
   const addManufacturer = () => {
     dispatch(registerManufacturer())
-    dispatch(checkUser(instances))
+      .unwrap()
+      .then((res) => {
+        dispatch(checkUser(instances))
+      })
   }
 
   return (
