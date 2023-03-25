@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const InputBox = ({
   name,
@@ -8,12 +8,14 @@ const InputBox = ({
   handleChange,
   placeholder,
   titleDescription,
-  doHalf
+  doHalf,
 }) => {
   return (
     <>
       <label className={doHalf ? "inputLabelHalf" : "inputLabel"}>
-        {title}:<div className="inputDescription">{titleDescription}</div>
+        <p>
+          {title}:<span className="inputDescription">{titleDescription}</span>
+        </p>
         <input
           className={doHalf ? "inputBoxHalf" : "inputBox"}
           name={name}
@@ -24,7 +26,7 @@ const InputBox = ({
         />
       </label>
     </>
-  )
-}
+  );
+};
 
-export default InputBox
+export default InputBox;
