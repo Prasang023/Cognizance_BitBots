@@ -83,7 +83,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
                       dispatch(clearData())
                     }
                     document
-                      .getElementById(`profile-text-box-${navItem}`)
+                      ?.getElementById(`profile-text-box-${navItem}`)
                       .classList.remove("active")
                     setNavItem(index)
                     document

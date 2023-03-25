@@ -8,6 +8,7 @@ import { Web3Storage } from "web3.storage"
 import { setError } from "@/redux/slices/error"
 import { setSuccess } from "@/redux/slices/success"
 import { addProduct, getQR } from "@/redux/slices/manufacturer"
+import { mintWarrantyNft } from "@/redux/slices/customer"
 
 function Product() {
   const dispatch = useDispatch()
@@ -36,6 +37,13 @@ function Product() {
     console.log("PNG link: ", downloadLink)
     downloadLink.click()
   }
+  // useEffect(() => {
+  //   const getTokenId = async () => {
+  //     const t=await instances.getProductId();
+
+  //   }
+  //   getTokenId()
+  // }, [])
 
   useEffect(() => {
     const generateQR = () => {
@@ -78,18 +86,22 @@ function Product() {
   }
 
   const handleClick = async () => {
-    // const hexTokenID = await instances.getProductId()
-    // const tokenID = parseInt(hexTokenID, 16)
-    // console.log(tokenID)
-    dispatch(
-      addProduct({
-        title: data.title,
-        // id: tokenID,
-        productImage: data.image,
-        desc: data.description,
-        expiryTime: data.expiry
+    const hexTokenID = await instances.getProductId()
+    const token = parseInt(hexTokenID, 16)
+    console.log(token)
+    dispatch(mintWarrantyNft({ uri: "Hello world", tokenId: token }))
+      .unwrap()
+      .then(() => {
+        dispatch(
+          addProduct({
+            title: data.title,
+            // id: tokenID,
+            productImage: data.image,
+            desc: data.description,
+            expiryTime: data.expiry
+          })
+        )
       })
-    )
     // setLocalLoading(true)
     // console.log(`${product} merged to ${walletAddress}`);
     setData({ title: "", description: "", image: "", expiry: "" })
