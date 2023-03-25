@@ -7,7 +7,7 @@ export const getProducts = createAsyncThunk(
   "customer/getProducts",
   async (_, thunkAPI) => {
     try {
-      const response = await thunkAPI.state.navbar.instances.getProducts();
+      const response = await thunkAPI.getState().navbar.instances.getProducts();
 
       console.log("Products: ", response);
 
@@ -23,7 +23,7 @@ export const customerSlice = createSlice({
   name: "customer",
   initialState: {
     loading: false,
-    products: [],
+    allProducts: [],
     error: null,
   },
   reducers: {},
@@ -37,7 +37,7 @@ export const customerSlice = createSlice({
       state.error = action.payload;
     }
     builder.addCase(getProducts.fulfilled, (state, action) => {
-      state.retailers = action.payload;
+      state.allProducts = action.payload;
       state.loading = false;
     });
     builder.addCase(getProducts.pending, onPending);
