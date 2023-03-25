@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 // import Navbar from "@/components/Navbar";
 import Layout from "@/components/Layout";
-import Sell from "@/components/Profile/Forms/Sell";
 import Scan from "@/components/Scan";
 import { ImCross } from "react-icons/im";
 
@@ -34,7 +33,7 @@ function profile() {
   }, [profile]);
 
   const nav_items = [
-    ["Add Retailer", "Add Product", "Sell Product"],
+    ["Add Retailer", "Add Product"],
     ["Sell Product"],
     ["Pending", "Active", "Expire", "Register as a Manufacturer"],
   ];
@@ -53,7 +52,7 @@ function profile() {
     },
   ];
   const right_items = [
-    [<Retailer />, <Product />, <Sell />],
+    [<Retailer />, <Product />],
     [<Scan />],
     [
       [

@@ -28,11 +28,9 @@ function Scan() {
         console.error("Error starting scanner:", error);
       });
     }
-    {
-      videoRef.current &&
-        videoRef.current.video &&
-        console.log(`Video width: ${videoRef.current.video.videoWidth}`);
-    }
+    videoRef.current &&
+      videoRef.current.video &&
+      console.log(`Video width: ${videoRef.current.video.videoWidth}`);
   };
 
   const handleChange = (e) => {
