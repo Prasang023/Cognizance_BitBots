@@ -1,25 +1,36 @@
-import React from "react"
-import { FaRegShareSquare, FaRegHandPeace } from "react-icons/fa"
-import { ConnectWallet } from "../CustomConnect"
-import { registerManufacturer } from "@/redux/slices/manufacturer"
-import { useDispatch, useSelector } from "react-redux"
-import { checkUser } from "@/redux/navbar"
+import React from "react";
+import { FaRegShareSquare, FaRegHandPeace } from "react-icons/fa";
+import { ConnectWallet } from "../CustomConnect";
+import { registerManufacturer } from "@/redux/slices/manufacturer";
+import { useDispatch, useSelector } from "react-redux";
+import { checkUser } from "@/redux/navbar";
+import { FaRegBell, FaRegTimesCircle } from "react-icons/fa"
 
 function Left({ setNavItem, navItem, profile, nav_items, profs }) {
-  const dispatch = useDispatch()
-  const { instances } = useSelector((state) => state.navbar)
+  const dispatch = useDispatch();
+  const { instances } = useSelector((state) => state.navbar);
 
   const addManufacturer = () => {
     dispatch(registerManufacturer())
       .unwrap()
       .then((res) => {
-        dispatch(checkUser(instances))
-      })
-  }
+        dispatch(checkUser(instances));
+      });
+  };
 
   return (
     <div className="dwar-profile-left">
       <div className="profile-top-box">
+        <div
+          className="dwar-notification"
+          onClick={() => {
+            const ele = document.getElementById("dwar-notification");
+            ele.style.opacity = 1;
+            ele.style.zIndex = 1000;
+          }}
+        >
+          <FaRegBell size={16} className="icons" />
+        </div>
         <div className="profile-top-box-round">
           <h1>{profs[profile].a}</h1>
         </div>
@@ -34,11 +45,11 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
           onClick={(e) => {
             document
               .getElementById(`profile-text-box-${navItem}`)
-              .classList.remove("active")
-            setNavItem(0)
+              .classList.remove("active");
+            setNavItem(0);
             document
               .getElementById(`profile-text-box-${0}`)
-              .classList.add("active")
+              .classList.add("active");
           }}
         >
           <div className="profile-text-item-box">
@@ -58,7 +69,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
                   <p>{e}</p>
                 </div>
               </div>
-            )
+            );
           } else if (index > 0) {
             return (
               <div
@@ -67,11 +78,11 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
                 onClick={(e) => {
                   document
                     .getElementById(`profile-text-box-${navItem}`)
-                    .classList.remove("active")
-                  setNavItem(index)
+                    .classList.remove("active");
+                  setNavItem(index);
                   document
                     .getElementById(`profile-text-box-${index}`)
-                    .classList.add("active")
+                    .classList.add("active");
                 }}
               >
                 <div className="profile-text-item-box">
@@ -79,7 +90,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
                   <p>{e}</p>
                 </div>
               </div>
-            )
+            );
           }
         })}
         <div className="profile-text-box disconnect">
@@ -89,7 +100,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Left
+export default Left;
