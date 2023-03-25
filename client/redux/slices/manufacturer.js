@@ -25,7 +25,7 @@ export const registerRetailer = createAsyncThunk(
   "manufacturer/registerRetailer",
   async (data, thunkAPI) => {
     try {
-      const response = await thunkAPI.state.navbar.instances.addRetailer(data);
+      const response = await thunkAPI.getState().navbar.instances.addRetailer(data);
 
       console.log("Retailer added to data", response);
 
