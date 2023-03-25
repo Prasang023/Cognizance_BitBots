@@ -10,4 +10,7 @@
     align-items: center;
     height: fit-content;
     position: relative;
+    &.remove{
+        overflow: hidden;
+    }
 }

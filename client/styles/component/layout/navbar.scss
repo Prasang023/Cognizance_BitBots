@@ -78,20 +78,6 @@
                 background-color: transparent;
             }
         }
-        .dwar-notification {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            border: 2px solid $blue_dark;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 20px;
-            cursor: pointer;
-            &:hover {
-                background-color: $blue_dark;
-            }
-        }
     }
 }
 .dwar-notification-container {
