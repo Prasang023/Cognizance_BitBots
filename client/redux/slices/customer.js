@@ -7,7 +7,7 @@ export const getProducts = createAsyncThunk(
   "customer/getProducts",
   async (_, thunkAPI) => {
     try {
-      const response = await thunkAPI.state.navbar.instances.getProducts();
+      const response = await thunkAPI.getState().navbar.instances.getProducts();
 
       console.log("Products: ", response);
 

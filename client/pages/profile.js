@@ -9,9 +9,15 @@ import { useSelector } from "react-redux";
 import Layout from "@/components/Layout";
 import Scan from "@/components/Scan";
 import { ImCross } from "react-icons/im";
+import { useAccount } from "wagmi";
+import { getProducts } from "@/redux/slices/customer";
 
 function profile() {
   const router = useRouter();
+  const { address } = useAccount();
+
+  const { instances } = useSelector((state) => state.navbar);
+
   const { userRole } = useSelector((state) => state.navbar);
   useEffect(() => {
     if (userRole == null || userRole == undefined) {
@@ -51,6 +57,15 @@ function profile() {
       b: "Customer",
     },
   ];
+
+  useEffect(() => {
+    const fetchAllProduct = async () => {
+      const product = await instances?.getProducts();
+      console.log(`Product:`, product);
+    };
+    fetchAllProduct();
+  }, [address]);
+
   const right_items = [
     [<Retailer />, <Product />],
     [<Scan />],
