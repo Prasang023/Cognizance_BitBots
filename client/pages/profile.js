@@ -1,31 +1,38 @@
-import Product from "@/components/Profile/Forms/Product";
-import Retailer from "@/components/Profile/Forms/Retailer";
-import Left from "@/components/Profile/Left";
-import Right from "@/components/Profile/Right";
-import React, { useState } from "react";
+import Product from "@/components/Profile/Forms/Product"
+import Retailer from "@/components/Profile/Forms/Retailer"
+import Left from "@/components/Profile/Left"
+import Right from "@/components/Profile/Right"
+import React, { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useSelector } from "react-redux"
 
 function profile() {
-  const [navItem, setNavItem] = useState(0);
-  const [profile, setProfile] = useState(2);
+  const { push } = useRouter()
+  const { userRole } = useSelector((state) => state.navbar)
+  if (!userRole) {
+    push("/")
+  }
+  const [navItem, setNavItem] = useState(0)
+  const [profile, setProfile] = useState(userRole)
   const nav_items = [
     ["Add Retailer", "Add Product"],
     ["Sell Product"],
-    ["Pending", "Active", "Expire", "Register as a Manufacturer"],
-  ];
+    ["Pending", "Active", "Expire", "Register as a Manufacturer"]
+  ]
   const profs = [
     {
       a: "M",
-      b: "Manufacturer",
+      b: "Manufacturer"
     },
     {
       a: "R",
-      b: "Retailer",
+      b: "Retailer"
     },
     {
       a: "C",
-      b: "Customer",
-    },
-  ];
+      b: "Customer"
+    }
+  ]
   const right_items = [
     [<Retailer />, <Product />],
     [],
@@ -34,50 +41,50 @@ function profile() {
         {
           src: "",
           heading: "one 1",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
         },
         {
           src: "",
           heading: "one 2",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
         },
         {
           src: "",
           heading: "one 3",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
         },
         {
           src: "",
           heading: "one 4",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
+        }
       ],
       [
         {
           src: "",
           heading: "two 1",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
         },
         {
           src: "",
           heading: "two 2",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
         },
         {
           src: "",
           heading: "two 3",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        },
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
+        }
       ],
       [
         {
           src: "",
           heading: "three 1",
-          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
+          para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ...."
         }
       ]
-    ],
-  ];
+    ]
+  ]
   return (
     <div className="main-dwar-profile-body">
       <Left
@@ -94,7 +101,7 @@ function profile() {
         right_items={right_items}
       />
     </div>
-  );
+  )
 }
 
-export default profile;
+export default profile

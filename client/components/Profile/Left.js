@@ -49,13 +49,13 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
               <div
                 className="profile-text-box remove"
                 id={`profile-text-box-${index}`}
-                onClick={(e) => {}}
+                onClick={addManufacturer}
               >
                 <div className="profile-text-item-box">
                   <p>{e}</p>
                 </div>
               </div>
-            );
+            )
           } else if (index > 0) {
             return (
               <div
