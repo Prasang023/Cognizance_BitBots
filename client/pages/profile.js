@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 // import Navbar from "@/components/Navbar";
 import Layout from "@/components/Layout";
 import Sell from "@/components/Profile/Forms/Sell";
+import Scan from "@/components/Scan";
 
 function profile() {
   const router = useRouter();
@@ -52,7 +53,7 @@ function profile() {
   ];
   const right_items = [
     [<Retailer />, <Product />, <Sell />],
-    [],
+    [<Scan />],
     [
       [
         {
