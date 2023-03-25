@@ -20,7 +20,7 @@ router.put('/updateProductStatus', async(req, res) => {
     updateProductStatus(req, res);
 })
 
-router.get('/qrGenerator', async(req, res) => {
+router.post('/qrGenerator', async(req, res) => {
     QRgenerator(req, res);
 })
 
