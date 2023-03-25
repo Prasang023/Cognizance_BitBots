@@ -44,7 +44,19 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
           </div>
         </div>
         {nav_items[profile].map((e, index) => {
-          if (index > 0) {
+          if (profile == 2 && index == 3) {
+            return (
+              <div
+                className="profile-text-box remove"
+                id={`profile-text-box-${index}`}
+                onClick={(e) => {}}
+              >
+                <div className="profile-text-item-box">
+                  <p>{e}</p>
+                </div>
+              </div>
+            );
+          } else if (index > 0) {
             return (
               <div
                 className="profile-text-box"
