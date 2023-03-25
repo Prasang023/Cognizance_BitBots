@@ -57,46 +57,42 @@ function Scan() {
   return (
     <>
       <div className="QrMain">
-        <div className="QrScannerContainer">
+        {scannedData ? (
           <div className="QrScanner">
-            <div>
-              {!scannedData ? (
-                <QrReader
-                  style={previewStyle}
-                  onScan={handleDetected}
-                  onLoad={handleLoad}
-                  onError={(e) => {
-                    console.error(e.message);
-                  }}
-                />
-              ) : (
-                <>
-                  <ProductBoard scannedData={scannedData} />
-                </>
-              )}
+            <QrReader
+              style={previewStyle}
+              onScan={handleDetected}
+              onLoad={handleLoad}
+              onError={(e) => {
+                console.error(e.message);
+              }}
+            />
+          </div>
+        ) : (
+          <>
+            <ProductBoard scannedData={scannedData} />
+          </>
+        )}
+        {scannedData ? (
+          <div className="input-container" style={{ textAlign: "center" }}>
+            <input
+              type="Number"
+              name="tokenID"
+              title="Token ID"
+              value={data.tokenID}
+              handleChange={handleChange}
+              placeholder="Enter Token ID"
+            />
+
+            <div className="" style={{ textAlign: "center" }}>
+              <button className="" onClick={handleClick}>
+                "Get Product"
+              </button>
             </div>
           </div>
-          {!scannedData ? (
-            <div className="input-container" style={{ textAlign: "center" }}>
-              <input
-                type="Number"
-                name="tokenID"
-                title="Token ID"
-                value={data.tokenID}
-                handleChange={handleChange}
-                placeholder="Enter Token ID"
-              />
-
-              <div className="" style={{ textAlign: "center" }}>
-                <button className="" onClick={handleClick}>
-                  "Get Product"
-                </button>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
