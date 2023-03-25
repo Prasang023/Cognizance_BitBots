@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Product from "@/components/Profile/Forms/Product";
 import Retailer from "@/components/Profile/Forms/Retailer";
 import Left from "@/components/Profile/Left";
@@ -74,26 +75,29 @@ function profile() {
           src: "",
           heading: "three 1",
           para: "he akjdn akjndn akjsdn akjasnd kjasnd nmasdnkjasd kjsndn ....",
-        }
-      ]
+        },
+      ],
     ],
   ];
   return (
-    <div className="main-dwar-profile-body">
-      <Left
-        setNavItem={setNavItem}
-        navItem={navItem}
-        profile={profile}
-        nav_items={nav_items}
-        profs={profs}
-      />
-      <Right
-        navItem={navItem}
-        nav_items={nav_items}
-        profile={profile}
-        right_items={right_items}
-      />
-    </div>
+    <>
+      <div className="main-dwar-profile-body">
+        <Navbar />
+        <Left
+          setNavItem={setNavItem}
+          navItem={navItem}
+          profile={profile}
+          nav_items={nav_items}
+          profs={profs}
+        />
+        <Right
+          navItem={navItem}
+          nav_items={nav_items}
+          profile={profile}
+          right_items={right_items}
+        />
+      </div>
+    </>
   );
 }
 
