@@ -1,40 +1,29 @@
-import Error from "@/components/Error";
 import React, { useState } from "react";
-import Loader from "@/components/Loader";
+import Error from "@/components/Error";
 import Layout from "@/components/Layout";
-import { create } from "ipfs-http-client";
-import { Web3Storage } from "web3.storage";
+import Loader from "@/components/Loader";
+import Success from "@/components/Success";
 import InputBox from "@/components/InputBox";
 import { setError } from "@/redux/slices/error";
 import { setSuccess } from "@/redux/slices/success";
+import { addProduct } from "@/redux/slices/manufacturer";
 import { useDispatch, useSelector } from "react-redux";
-
-const project_id = "2LaElUcAr2SYK3KuPpor7Xlc5hB";
-const project_secret = "0947f1f7854b4631c685a30c20e51d4d";
+import { Web3Storage } from "web3.storage";
 
 function Index() {
-  const dispatch = useDispatch();
   const [localLoading, setLocalLoading] = useState(false);
   const [data, setData] = useState({
     title: "",
     description: "",
     image: "",
+    expiry: "",
   });
+
+  const dispatch = useDispatch();
+  const { walletAddress, instances } = useSelector((state) => state.navbar);
 
   const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDhhQTQzM0RkY2M4QzM5YWJFQzdmNzZDM2REQjlFOTBhMWY3RTk2RjMiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjkxMjcxMDk3NjMsIm5hbWUiOiJsZW5kTmZ0In0.7Zu-wSF34-7GlU5rVIXAvrIczw6MQYT4yV7vOVU9pis`;
   const storage = new Web3Storage({ token: token });
-
-  const { walletAddress /*instances nftInstances*/ } = useSelector(
-    (state) => state.navbar
-  );
-
-  const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-    console.log(data);
-  };
 
   const nftUpload = (e) => {
     e.preventDefault();
@@ -60,43 +49,39 @@ function Index() {
     console.log(data.image);
   };
 
-  const addData = async () => {
-    console.log("clicked");
-    const auth =
-      "Basic " +
-      Buffer.from(project_id + ":" + project_secret).toString("base64");
-
-    const client = create({
-      host: "ipfs.infura.io",
-      port: 5001,
-      protocol: "https",
-      apiPath: "/api/v0",
-      headers: {
-        authorization: auth,
-      },
+  const handleChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
     });
-
-    setLocalLoading(true);
-    client.add(JSON.stringify(data)).then(async (response) => {
-      console.log("result", `https://ipfs.io/ipfs/${response.path}`);
-      setLocalLoading(true);
-      const dataIpfs = `https://ipfs.io/ipfs/${response.path}`;
-      console.log("addresss", walletAddress);
-      console.log("dataIPFS", dataIpfs);
-      setLocalLoading(false);
-
-      // let qrNftTx = await nftInstances.safeMint(walletAddress, dataIpfs);
-      // console.log("Mining...", qrNftTx);
-      // // Status
-      // let tx = await qrNftTx.wait();
-      // console.log("Mined QR Transaction !", tx);
-      // setLocalLoading(false);
-      // console.log(
-      //   `Mined, see transaction: https://mumbai.polygonscan.com/tx/${qrNftTx.hash}`
-      // );
-    });
+    console.log(data);
   };
-
+  const handleClick = async () => {
+    dispatch(
+      addProduct({
+        title: data.title,
+        id: data.tokenId,
+        productImage: data.image,
+        desc: data.description,
+        expiryTime: data.expiry,
+      })
+    );
+    try {
+      setLocalLoading(true);
+      const product = await instances.addProduct(
+        data.title,
+        data.tokenId,
+        data.image,
+        data.description,
+        data.expiry
+      );
+      console.log(`${product} merged to ${walletAddress}`);
+      setLocalLoading(false);
+    } catch (error) {
+      console.error(error.message);
+      setLocalLoading(false);
+    }
+  };
   return (
     <div>
       <Layout>
@@ -104,7 +89,7 @@ function Index() {
           <div className="authcenter">
             <>
               <div className="txt">
-                <h1 style={{ margin: "10px 0px" }}>Mint Product Details</h1>
+                <h1 style={{ margin: "10px 0px" }}>Add Product Details</h1>
               </div>
               <Error />
               <InputBox
@@ -136,15 +121,26 @@ function Index() {
                   disabled={localLoading}
                 />
               </label>
+              <label className="inputLabel">
+                <InputBox
+                  name="expiry"
+                  title="Expiry"
+                  value={data.expiry}
+                  handleChange={handleChange}
+                  placeholder="Exipry Duration (in Months)."
+                  disabled={localLoading}
+                />
+              </label>
 
               <div className="widthDiv">
-                <button className="btn mintBtn" onClick={addData}>
+                <button className="btn mintBtn" onClick={handleClick}>
                   {localLoading ? <Loader height="25" width="25" /> : "Mint"}
                 </button>
               </div>
             </>
           </div>
         </div>
+        <Success />
       </Layout>
     </div>
   );

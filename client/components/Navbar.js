@@ -2,16 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { ethers } from "ethers";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-// import logo from "../assets/logo.png";
 import { useAccount, useSigner } from "wagmi";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useDispatch, useSelector } from "react-redux";
-import abi from "../assets/contract_data/Products.json";
-import nftAbi from "../assets/contract_data/nft.json";
-import DL_contract_address from "../assets/contract_data/ProductsAddress.json";
-import nft_contract_address from "../assets/contract_data/nftAddress.json";
-import { addContractAddresses, saveAddressAndSigner } from "@/redux/navbar";
+import { useDispatch } from "react-redux";
+import warrantyAbi from "../assets/contract_data/warranty.json";
+import warranty_contract_address from "../assets/contract_data/warrantyAddress.json";
+import {
+  addContractAddresses,
+  checkUser,
+  saveAddressAndSigner,
+} from "@/redux/navbar";
+import { ConnectWallet } from "./CustomConnect";
+import * as Push from "@pushprotocol/restapi";
 
 // icons
 import { FaRegBell, FaRegTimesCircle } from "react-icons/fa";
@@ -20,43 +21,54 @@ import { FaRegBell, FaRegTimesCircle } from "react-icons/fa";
 import logo from "../assets/logo/dwar.svg";
 
 function Navbar() {
-  const router = useRouter();
-  const urlpath = router.pathname;
-
   const dispatch = useDispatch();
-
   const { address } = useAccount();
   const { data: signer } = useSigner();
 
-  const [addressfinal, setAddressfinal] = useState(null);
+  const [notification, setNotification] = useState(null);
+
+  useEffect(() => {
+    const notification = async () => {
+      const notifs = await Push.user.getFeeds({
+        user: address,
+        env: "staging",
+        limit: 5,
+        page: 1,
+      });
+      setNotification(notifs);
+    };
+    !address ? setNotification(null) : notification();
+  }, [address]);
 
   const instances = new ethers.Contract(
-    DL_contract_address.address,
-    abi.abi,
-    signer
-  );
-
-  const nftInstances = new ethers.Contract(
-    nft_contract_address.address,
-    nftAbi.abi,
+    warranty_contract_address.address,
+    warrantyAbi.abi,
     signer
   );
 
   useEffect(() => {
     dispatch(
       addContractAddresses({
-        DL_contract_address: DL_contract_address.address,
-        nft_contract_address: nft_contract_address.address,
+        warranty_contract_address: warranty_contract_address.address,
       })
     );
     address && signer
       ? dispatch(
-          saveAddressAndSigner({ address, signer, instances, nftInstances })
+          saveAddressAndSigner({
+            address,
+            signer,
+            instances,
+          })
         )
       : null;
+    // const findUser = async () => {
+    //   const res = await instances?.checkUser()
+    //   console.log(res)
+    // }
+    // if(instances){
+    //   findUser()
+    // }
   }, [signer, dispatch]);
-
-  const notifications = ['hello hetu'];
 
   return (
     <>
@@ -75,13 +87,20 @@ function Navbar() {
             />
           </div>
           <div className="dwar-notification-box-list">
-            {notifications.map((e, index) => {
-              return (
-                <div className="dwar-notification-box-list-item" key={`dwar-notification-box-list-item-${index}`}>
-                  {e}
-                </div>
-              );
-            })}
+            {notification ? (
+              notification?.map((notifs, index) => {
+                return (
+                  <div
+                    className="dwar-notification-box-list-item"
+                    key={`dwar-notification-box-list-item-${index}`}
+                  >
+                    {notifs.title}: {notifs.message}
+                  </div>
+                );
+              })
+            ) : (
+              <div style={{ color: "black" }}>Please Connect to Wallet</div>
+            )}
           </div>
         </div>
       </div>
@@ -89,6 +108,7 @@ function Navbar() {
         <div className="dwar-logo-container">
           <Link href="/">
             <Image
+              alt=""
               src={logo}
               width={95}
               height={95}
@@ -104,8 +124,7 @@ function Navbar() {
             <Link href="/">Help & Support</Link>
           </div>
           <div className="dwar-btn-container">
-            {/* <ConnectButton /> */}
-            <button>Connect</button>
+            <ConnectWallet />
             <div
               className="dwar-notification"
               onClick={() => {

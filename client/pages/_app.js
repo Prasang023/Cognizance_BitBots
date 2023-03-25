@@ -1,9 +1,7 @@
-// import "@/styles/help.css";
-// import "@/styles/navbar.css";
-// import "@/styles/footer.css";
 import "@/styles/globals.css";
 import "@/styles/index.scss";
-import "../styles/component/layout/mintform.scss";
+// import "../styles/component/layout/mintform.scss";
+import "@/styles/mintform.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { wrapper } from "../redux/store";
