@@ -15,6 +15,27 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
+        .dwar-notification {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid $card;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 20px;
+            position: absolute;
+            top: 10px;
+            left: 0;
+            cursor: pointer;
+            svg{
+                fill: $font-light;
+            }
+            &:hover {
+                background-color: $card;
+            }
+        }
         .profile-top-box-round{
             width: 80px;
             height: 80px;
@@ -111,6 +132,21 @@
                 svg{
                     transform: scaleX(-1);
                     fill: $font-light;
+                }
+                div{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                button{
+                    width: 100%;
+                    height: 40%;
+                    background-color: transparent;
+                    outline: none;
+                    border: none;
+                    cursor: pointer;
                 }
             }
         }

@@ -131,16 +131,6 @@ function Navbar({hide}) {
           </div>
           <div className="dwar-btn-container">
             <ConnectWallet />
-            <div
-              className="dwar-notification"
-              onClick={() => {
-                const ele = document.getElementById("dwar-notification")
-                ele.style.opacity = 1
-                ele.style.zIndex = 1000
-              }}
-            >
-              <FaRegBell size={16} className="icons" />
-            </div>
           </div>
         </div>
       </div>
