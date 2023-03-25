@@ -3,7 +3,7 @@ import Head from "next/head";
 import Layout from "@/components/Layout";
 import First from "@/components/Frontpages/First";
 import Second from "@/components/Frontpages/Second";
-// import Notification from "@/components/Notification";
+import Notification from "@/components/Notification";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,7 @@ export default function Home() {
         <Layout>
           <First />
           <Second />
-          {/* <Form /> */}
+          <Notification />
         </Layout>
       </div>
     </>

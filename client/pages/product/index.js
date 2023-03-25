@@ -57,10 +57,13 @@ function Index() {
     console.log(data);
   };
   const handleClick = async () => {
+    const hexTokenID = await instances.getProductId();
+    const tokenID = parseInt(hexTokenID, 16);
+    console.log(tokenID);
     dispatch(
       addProduct({
         title: data.title,
-        id: data.tokenId,
+        id: tokenID,
         productImage: data.image,
         desc: data.description,
         expiryTime: data.expiry,
@@ -70,12 +73,13 @@ function Index() {
       setLocalLoading(true);
       const product = await instances.addProduct(
         data.title,
-        data.tokenId,
+        tokenID,
         data.image,
         data.description,
         data.expiry
       );
       console.log(`${product} merged to ${walletAddress}`);
+      setData({ title: "", description: "", image: "", expiry: "" });
       setLocalLoading(false);
     } catch (error) {
       console.error(error.message);
