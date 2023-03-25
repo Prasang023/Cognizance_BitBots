@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, use } from "react"
 import * as Push from "@pushprotocol/restapi"
 import { useDispatch, useSelector } from "react-redux"
 // import Success from "@/components/Success";
 // import Error from "@/components/Error";
-import { useSigner } from "wagmi"
+import { useAccount, useSigner } from "wagmi"
 import { setSuccess } from "@/redux/slices/success"
 import { setError } from "@/redux/slices/error"
 import InputBox from "./InputBox"
@@ -27,6 +27,7 @@ function ProductBoard({ scannedData }) {
     recipient_address: ""
   })
 
+  const { address } = useAccount()
   const PK = process.env.CHANNEL_KEY
   const Pkey = `0x${PK}`
   const channelAddress = "0x7eff959E7D7fB6b9F3cDA78599966870929A7628"
@@ -119,7 +120,7 @@ function ProductBoard({ scannedData }) {
           <p>{productDetail ? statusArray[productDetail[9]] : "Lorem ipsum"}</p>
         </div>
       </div>
-      {productDetail && productDetail[9] == 0 ? (
+      {productDetail && productDetail[9] == 0 && productDetail[11] == address ? (
         <>
           <div className="box">
             <InputBox

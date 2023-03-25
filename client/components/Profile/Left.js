@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { checkUser } from "@/redux/navbar"
 import { FaRegBell, FaRegTimesCircle } from "react-icons/fa"
 import Loader from "../Loader"
+import { setSuccess } from "@/redux/slices/success"
 
 function Left({ setNavItem, navItem, profile, nav_items, profs }) {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
     dispatch(registerManufacturer())
       .unwrap()
       .then((res) => {
+        dispatch(setSuccess("Successfully Added!"))
         dispatch(checkUser(instances))
       })
   }

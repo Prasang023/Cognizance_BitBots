@@ -13,7 +13,7 @@ import { mintWarrantyNft } from "@/redux/slices/customer"
 function Product() {
   const dispatch = useDispatch()
   const { walletAddress, instances } = useSelector((state) => state.navbar)
-  const [addedProduct, setAddedProduct] = useState(null)
+  const [addProductId, setAddProductId] = useState(null)
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -37,22 +37,22 @@ function Product() {
     console.log("PNG link: ", downloadLink)
     downloadLink.click()
   }
-  // useEffect(() => {
-  //   const getTokenId = async () => {
-  //     const t=await instances.getProductId();
-
-  //   }
-  //   getTokenId()
-  // }, [])
-
   useEffect(() => {
-    const generateQR = () => {
-      dispatch(getQR({ qrId: productId }))
+    const getTokenId = async () => {
+      const t = await instances.getProductId()
+      setAddProductId(parseInt(t._hex, 16))
     }
-    if (productId) {
-      generateQR()
-    }
-  }, [productId])
+    getTokenId()
+  }, [])
+
+  // useEffect(() => {
+  //   const generateQR = () => {
+  //     dispatch(getQR({ qrId: productId }))
+  //   }
+  //   if (productId) {
+  //     generateQR()
+  //   }
+  // }, [productId])
 
   const nftUpload = (e) => {
     e.preventDefault()
@@ -86,10 +86,11 @@ function Product() {
   }
 
   const handleClick = async () => {
-    const hexTokenID = await instances.getProductId()
-    const token = parseInt(hexTokenID, 16)
-    console.log(token)
-    dispatch(mintWarrantyNft({ uri: "Hello world", tokenId: token }))
+    // const hexTokenID = await instances.getProductId()
+    // const token = parseInt(hexTokenID, 16)
+    // console.log(token)
+    console.log("using product ID", addProductId)
+    dispatch(mintWarrantyNft({ uri: "Hello world", tokenId: addProductId }))
       .unwrap()
       .then(() => {
         dispatch(
@@ -101,6 +102,7 @@ function Product() {
             expiryTime: data.expiry
           })
         )
+        dispatch(getQR({ qrId: addProductId }))
       })
     // setLocalLoading(true)
     // console.log(`${product} merged to ${walletAddress}`);
