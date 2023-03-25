@@ -13,6 +13,7 @@ import warranty_contract_address from "../../assets/contract_data/warrantyAddres
 function Card({ data }) {
   console.log(data);
   const { signer } = useSelector((state) => state.navbar);
+
   // const [data, setData] = useState({
   //   toAddress: "",
   //   tokenId: null,
@@ -108,8 +109,10 @@ function Card({ data }) {
         <p>{data.para}</p>
       </div>
       <div className="btn-box">
-        <button onClick={Activate}>Activate</button>
-        <button onClick={Resell}>Resell</button>
+        {data[9] == 1 || data[9] == 2 ? (
+          <button onClick={Activate}>Activate</button>
+        ) : null}
+        {data[9] == 2 ? <button onClick={Resell}>Resell</button> : null}
       </div>
     </div>
   );

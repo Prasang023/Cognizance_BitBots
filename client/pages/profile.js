@@ -17,8 +17,6 @@ function profile() {
   const dispatch = useDispatch();
   const { address } = useAccount();
 
-  const { instances } = useSelector((state) => state.navbar);
-
   const { userRole } = useSelector((state) => state.navbar);
   const { allProducts } = useSelector((state) => state.customer);
   useEffect(() => {
