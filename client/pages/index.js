@@ -1,13 +1,20 @@
 // import { Inter } from "next/font/google";
-import Head from "next/head";
-import Layout from "@/components/Layout";
-import First from "@/components/Frontpages/First";
-import Second from "@/components/Frontpages/Second";
+import Head from "next/head"
+import Layout from "@/components/Layout"
+import First from "@/components/Frontpages/First"
+import Second from "@/components/Frontpages/Second"
+import { useSelector } from "react-redux"
+import { useRouter } from "next/navigation"
 // import Notification from "@/components/Notification";
 
 // const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { userRole } = useSelector((state) => state.navbar)
+  const { push } = useRouter()
+  if (userRole) {
+    push("/profile")
+  }
   return (
     <>
       <Head>
@@ -24,5 +31,5 @@ export default function Home() {
         </Layout>
       </div>
     </>
-  );
+  )
 }

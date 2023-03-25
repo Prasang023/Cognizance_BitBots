@@ -1,31 +1,37 @@
-import Link from "next/link";
-import Image from "next/image";
-import { ethers } from "ethers";
-import React, { useState, useEffect } from "react";
-import { useAccount, useSigner } from "wagmi";
-import { useDispatch } from "react-redux";
-import warrantyAbi from "../assets/contract_data/warranty.json";
-import warranty_contract_address from "../assets/contract_data/warrantyAddress.json";
+import Link from "next/link"
+import Image from "next/image"
+import { ethers } from "ethers"
+import React, { useState, useEffect } from "react"
+import { useAccount, useSigner } from "wagmi"
+import { useDispatch, useSelector } from "react-redux"
+import warrantyAbi from "../assets/contract_data/warranty.json"
+import warranty_contract_address from "../assets/contract_data/warrantyAddress.json"
 import {
   addContractAddresses,
   checkUser,
   saveAddressAndSigner,
-} from "@/redux/navbar";
-import { ConnectWallet } from "./CustomConnect";
-import * as Push from "@pushprotocol/restapi";
+  clearNavbar
+} from "@/redux/navbar"
+import { ConnectWallet } from "./CustomConnect"
+import * as Push from "@pushprotocol/restapi"
 
 // icons
-import { FaRegBell, FaRegTimesCircle } from "react-icons/fa";
+import { FaRegBell, FaRegTimesCircle } from "react-icons/fa"
 
 // image
-import logo from "../assets/logo/dwar.svg";
+import logo from "../assets/logo/dwar.svg"
 
 function Navbar() {
-  const dispatch = useDispatch();
-  const { address } = useAccount();
-  const { data: signer } = useSigner();
+  const dispatch = useDispatch()
+  const { address } = useAccount()
+  const { data: signer } = useSigner()
+  if(!address) {
+    dispatch(clearNavbar());
+  }
+  // console.log("account:", account)
 
-  const [notification, setNotification] = useState(null);
+  const [notification, setNotification] = useState(null)
+  // const { userRole } = useSelector((state) => state.navbar);
 
   useEffect(() => {
     const notification = async () => {
@@ -33,42 +39,42 @@ function Navbar() {
         user: address,
         env: "staging",
         limit: 5,
-        page: 1,
-      });
-      setNotification(notifs);
-    };
-    !address ? setNotification(null) : notification();
-  }, [address]);
+        page: 1
+      })
+      setNotification(notifs)
+    }
+    !address ? setNotification(null) : notification()
+  }, [address])
 
   const instances = new ethers.Contract(
     warranty_contract_address.address,
     warrantyAbi.abi,
     signer
-  );
+  )
 
   useEffect(() => {
     dispatch(
       addContractAddresses({
-        warranty_contract_address: warranty_contract_address.address,
+        warranty_contract_address: warranty_contract_address.address
       })
-    );
+    )
     address && signer
       ? dispatch(
           saveAddressAndSigner({
             address,
             signer,
-            instances,
+            instances
           })
         )
-      : null;
-    // const findUser = async () => {
-    //   const res = await instances?.checkUser()
-    //   console.log(res)
-    // }
-    // if(instances){
-    //   findUser()
-    // }
-  }, [signer, dispatch]);
+      : null
+    const findUser = async () => {
+      const res = await instances?.checkUser()
+      console.log(res)
+    }
+    // findUser()
+    instances ? dispatch(checkUser(instances)) : null
+    // await instances?.checkUser()
+  }, [signer, dispatch])
 
   return (
     <>
@@ -80,9 +86,9 @@ function Navbar() {
               size={20}
               className="icons"
               onClick={() => {
-                const ele = document.getElementById("dwar-notification");
-                ele.style.opacity = 0;
-                ele.style.zIndex = -1000;
+                const ele = document.getElementById("dwar-notification")
+                ele.style.opacity = 0
+                ele.style.zIndex = -1000
               }}
             />
           </div>
@@ -96,7 +102,7 @@ function Navbar() {
                   >
                     {notifs.title}: {notifs.message}
                   </div>
-                );
+                )
               })
             ) : (
               <div style={{ color: "black" }}>Please Connect to Wallet</div>
@@ -128,9 +134,9 @@ function Navbar() {
             <div
               className="dwar-notification"
               onClick={() => {
-                const ele = document.getElementById("dwar-notification");
-                ele.style.opacity = 1;
-                ele.style.zIndex = 1000;
+                const ele = document.getElementById("dwar-notification")
+                ele.style.opacity = 1
+                ele.style.zIndex = 1000
               }}
             >
               <FaRegBell size={16} className="icons" />
@@ -139,7 +145,7 @@ function Navbar() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

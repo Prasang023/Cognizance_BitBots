@@ -3,6 +3,22 @@ import { setError } from "./error";
 
 import axios from "axios";
 
+export const registerManufacturer = createAsyncThunk(
+  "manufacturer/registerManufacturer",
+  async (_, thunkAPI) => {
+    try {
+      const response = await thunkAPI.state.navbar.instances.addManufacturer();
+
+      console.log("Manufacturer added to data", response);
+
+      return response;
+    } catch (err) {
+      thunkAPI.dispatch(setError(err.response?.data?.message));
+      return thunkAPI.rejectWithValue(err.response?.data?.message);
+    }
+  }
+);
+
 export const registerRetailer = createAsyncThunk(
   "manufacturer/registerRetailer",
   async (data, thunkAPI) => {
@@ -88,14 +104,19 @@ export const manufacturerSlice = createSlice({
       state.qrData = action.payload;
       state.loading = false;
     });
+    builder.addCase(registerManufacturer.fulfilled, (state, action) => {
+      state.loading = false;
+    });
     builder
       .addCase(registerRetailer.pending, onPending)
       .addCase(addProduct.pending, onPending)
-      .addCase(getQR.pending, onPending);
+      .addCase(getQR.pending, onPending)
+      .addCase(registerManufacturer.pending, onPending);
     builder
       .addCase(registerRetailer.rejected, onRejection)
       .addCase(addProduct.rejected, onRejection)
-      .addCase(getQR.rejected, onRejection);
+      .addCase(getQR.rejected, onRejection)
+      .addCase(registerManufacturer.rejected, onRejection);
   },
 });
 
