@@ -1,14 +1,36 @@
-import Navbar from "@/components/Navbar";
-import Sell from "@/components/Profile/Forms/Sell";
 import Product from "@/components/Profile/Forms/Product";
 import Retailer from "@/components/Profile/Forms/Retailer";
 import Left from "@/components/Profile/Left";
 import Right from "@/components/Profile/Right";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import Navbar from "@/components/Navbar";
+import Layout from "@/components/Layout";
+import Sell from "@/components/Profile/Forms/Sell";
 
 function profile() {
+  const router = useRouter();
+  const { userRole } = useSelector((state) => state.navbar);
+  useEffect(() => {
+    if (userRole == null || userRole == undefined) {
+      document.getElementById("demo-btn").click();
+    }
+  }, []);
   const [navItem, setNavItem] = useState(0);
-  const [profile, setProfile] = useState(0);
+  const [profile, setProfile] = useState(
+    userRole == null || userRole == undefined ? 2 : userRole
+  );
+  useEffect(() => {
+    setProfile(userRole);
+  }, [userRole]);
+
+  useEffect(() => {
+    if (userRole == null || userRole == undefined) {
+      setProfile(2);
+    }
+  }, [profile]);
+
   const nav_items = [
     ["Add Retailer", "Add Product", "Sell"],
     ["Sell Product"],
@@ -81,9 +103,17 @@ function profile() {
     ],
   ];
   return (
-    <>
+    <Layout hide={true}>
+      <button
+        id="demo-btn"
+        onClick={(e) => {
+          router.push("/");
+        }}
+        style={{ visibility: "hidden" }}
+      >
+        Remove
+      </button>
       <div className="main-dwar-profile-body">
-        <Navbar />
         <Left
           setNavItem={setNavItem}
           navItem={navItem}
@@ -98,7 +128,7 @@ function profile() {
           right_items={right_items}
         />
       </div>
-    </>
+    </Layout>
   );
 }
 

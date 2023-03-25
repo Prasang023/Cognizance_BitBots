@@ -1,10 +1,10 @@
 import React from "react";
 import { FaDiscord, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import Link from "next/link";
-function Footer() {
+function Footer({hide}) {
   return (
     <>
-      <div className="fContainer">
+      <div className="fContainer" style={hide ? { visibility: "hidden" } : { visibility: "visible" }}>
         <div className="footer-container">
           <div className="content-container">
             <Link href="/" className="first">Terms & Conditions</Link>
