@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 // import Navbar from "@/components/Navbar";
 import Layout from "@/components/Layout";
 import Sell from "@/components/Profile/Forms/Sell";
+import Scan from "@/components/Scan";
 import { ImCross } from "react-icons/im";
 
 function profile() {
@@ -33,7 +34,7 @@ function profile() {
   }, [profile]);
 
   const nav_items = [
-    ["Add Retailer", "Add Product", "Sell"],
+    ["Add Retailer", "Add Product", "Sell Product"],
     ["Sell Product"],
     ["Pending", "Active", "Expire", "Register as a Manufacturer"],
   ];
@@ -53,7 +54,7 @@ function profile() {
   ];
   const right_items = [
     [<Retailer />, <Product />, <Sell />],
-    [],
+    [<Scan />],
     [
       [
         {
