@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Push from "@pushprotocol/restapi";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import InputBox from "@/components/InputBox";
 import Success from "@/components/Success";
 import Error from "@/components/Error";
