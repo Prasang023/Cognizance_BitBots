@@ -14,7 +14,7 @@ const Layout = ({ children, hide = false }) => {
   // const { address } = useAccount();
   console.log("hide value: ", hide)
   return (
-    <div className="dwar-container">
+    <div className={hide ? "dwar-container remove" : "dwar-container"}>
       <Navbar
         hide={hide}
       />
@@ -27,6 +27,7 @@ const Layout = ({ children, hide = false }) => {
         </>
       )} */}
       <div>{children}</div>
+      
       <Footer hide={hide}/>
     </div>
   )
