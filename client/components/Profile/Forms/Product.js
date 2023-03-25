@@ -80,6 +80,7 @@ function Product() {
       setLocalLoading(false);
     } catch (error) {
       console.error(error.message);
+      setData({ title: "", description: "", image: "", expiry: "" });
       setLocalLoading(false);
     }
   };

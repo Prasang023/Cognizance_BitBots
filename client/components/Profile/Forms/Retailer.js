@@ -33,11 +33,13 @@ function Retailer() {
 
       dispatch(registerRetailer(data.retailerAddress));
       const retailer = await instances.addRetailer(data.retailerAddress);
-
-      console.log(`${walletAddress} associates with retailer: ${retailer}`);
+      console.log(retailer);
+      // console.log(`${walletAddress} associates with retailer: ${retailer}`);
+      setData({ retailerAddress: "" });
       setLocalLoading(false);
     } catch (error) {
       setLocalLoading(false);
+      setData({ retailerAddress: "" });
       console.error(error.message);
     }
   };
@@ -54,7 +56,7 @@ function Retailer() {
           title="Enter Retailer's Address"
           value={data.retailerAddress}
           handleChange={handleChange}
-          placeholder="User Address as Retailer"
+          placeholder="Retailer 0x...."
           disabled={localLoading}
         />
 

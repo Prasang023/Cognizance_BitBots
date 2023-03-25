@@ -12,7 +12,7 @@ function Index() {
     console.log(data);
   };
 
-  const sendNotifs = async () => {
+  const handleClick = async () => {
     const router = useRouter();
     router.push('/')
     try {
