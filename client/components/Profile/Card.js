@@ -1,14 +1,15 @@
 import React from 'react'
 
-function Card() {
+function Card({data}) {
+  console.log(data);
   return (
     <div className='card'>
       <div className='photo-card'>
 
       </div>
       <div className='text-box'>
-        <h4>Product</h4>
-        <p>ajjns asdn akjsnd kajsnd ja a asdjdn ajssnd akjs kas skn ans ...</p>
+        <h4>{data.heading}</h4>
+        <p>{data.para}</p>
       </div>
       <div className='btn-box'>
         <button>Add</button>
