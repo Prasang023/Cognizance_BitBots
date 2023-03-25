@@ -5,8 +5,7 @@ import { clearSuccess } from "../redux/slices/success";
 
 const Success = () => {
   // const [showError, setIsShowError] = useState(true)
-  // const { message } = useSelector((state) => state.success)
-  const message = "hello";
+  const { message } = useSelector((state) => state.success)
   console.log("in success comp", message);
   const dispatch = useDispatch();
   useEffect(() => {
