@@ -61,7 +61,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
             </div>
           </div>
           {nav_items[profile].map((e, index) => {
-            if (profile == 2 && index == 3) {
+            if (profile == 2 && index == 1) {
               return (
                 <div
                   className="profile-text-box remove"
