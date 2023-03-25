@@ -11,6 +11,7 @@ import Scan from "@/components/Scan";
 import { ImCross } from "react-icons/im";
 import { useAccount } from "wagmi";
 import { getProducts } from "@/redux/slices/customer";
+import Model from "@/components/Profile/Model";
 
 function profile() {
   const router = useRouter();
