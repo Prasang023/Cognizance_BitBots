@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Loader";
 import InputBox from "../../InputBox";
+import Error from "@/components/Error";
+import Success from "@/components/Success";
+import { registerRetailer } from "@/redux/slices/manufacturer";
+
+import warrantyABI from "../../../assets/contract_data/warranty.json";
+import warranty_contract_address from "../../../assets/contract_data/warrantyAddress.json";
 
 function Retailer() {
   const dispatch = useDispatch();
@@ -27,11 +33,13 @@ function Retailer() {
 
       dispatch(registerRetailer(data.retailerAddress));
       const retailer = await instances.addRetailer(data.retailerAddress);
-
-      console.log(`${walletAddress} associates with retailer: ${retailer}`);
+      console.log(retailer);
+      // console.log(`${walletAddress} associates with retailer: ${retailer}`);
+      setData({ retailerAddress: "" });
       setLocalLoading(false);
     } catch (error) {
       setLocalLoading(false);
+      setData({ retailerAddress: "" });
       console.error(error.message);
     }
   };
@@ -41,12 +49,14 @@ function Retailer() {
         <div className="txt">
           <h1>Register Retailers</h1>
         </div>
+        <Error />
+
         <InputBox
           name="retailerAddress"
           title="Enter Retailer's Address"
           value={data.retailerAddress}
           handleChange={handleChange}
-          placeholder="User Address as Retailer"
+          placeholder="Retailer 0x...."
           disabled={localLoading}
         />
 
@@ -56,6 +66,7 @@ function Retailer() {
           </button>
         </div>
       </div>
+      <Success />
     </div>
   );
 }

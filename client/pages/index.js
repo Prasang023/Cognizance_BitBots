@@ -27,7 +27,7 @@ export default function Home() {
         <Layout>
           <First />
           <Second />
-          {/* <Form /> */}
+          {/* <Notification /> */}
         </Layout>
       </div>
     </>

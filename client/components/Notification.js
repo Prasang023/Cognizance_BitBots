@@ -1,40 +1,28 @@
-import React, { useState, useEffect } from "react";
-// import { ethers } from "ethers";
-import { useAccount, useSigner } from "wagmi";
+import { useSigner } from "wagmi";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import * as Push from "@pushprotocol/restapi";
-import { payloads } from "@pushprotocol/restapi";
+import { setError } from "@/redux/slices/error";
+import { setSuccess } from "@/redux/slices/success";
 
 function Notification() {
-  const [notification, setNotification] = useState(null);
+  const dispatch = useDispatch();
+  // const { instances } = useSelector((state) => state.navbar);
+
   const [data, setData] = useState({
-    title: "",
-    body: "",
     recipient_address: "",
   });
 
-  const { address } = useAccount();
   const PK = process.env.CHANNEL_KEY;
   const Pkey = `0x${PK}`;
   const channelAddress = "0x7eff959E7D7fB6b9F3cDA78599966870929A7628";
 
   const { data: signer } = useSigner(Pkey);
 
-  useEffect(() => {
-    const notification = async () => {
-      const notifs = await Push.user.getFeeds({
-        user: address,
-        env: "staging",
-        limit: 5,
-        page: 1,
-      });
-      setNotification(notifs);
-    };
-    notification();
-  }, []);
-
-  console.log(notification);
-
   const sendNotifs = async () => {
+    // const hexTokenID = await instances.getProductId();
+    // const tokenID = parseInt(hexTokenID, 16);
+    // console.log(tokenID);
     try {
       await Push.payloads.sendNotification({
         signer,
@@ -45,8 +33,8 @@ function Notification() {
           body: "Message!",
         },
         payload: {
-          title: data.title,
-          body: data.body,
+          title: `Pending Warranty`,
+          body: `You have recieved a request for ${0}, please activate the warranty`,
           cta: "",
           img: "",
         },
@@ -54,9 +42,9 @@ function Notification() {
         channel: channelAddress,
         env: "staging",
       });
-
-      console.log("Notification Sent");
+      dispatch(setSuccess("Notification Sent"));
     } catch (error) {
+      dispatch(setError("Unable to Notify !!"));
       console.error(error.message);
     }
   };
@@ -67,37 +55,11 @@ function Notification() {
   };
 
   const handleClick = () => {
-    console.log("click");
     sendNotifs();
-    setData({ title: "", body: "", recipient_address: "" });
   };
   return (
     <div>
-      <div className="showNotifs" style={{ color: "white" }}>
-        {notification &&
-          notification?.map((notifs) => (
-            <li>
-              {notifs.title}: {notifs.message}
-            </li>
-          ))}
-      </div>
       <div className="sendNotifs" style={{ color: "white" }}>
-        <label htmlFor="title">Title: </label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          value={data.title}
-          onChange={handleChange}
-        />
-        <label htmlFor="message">Message: </label>
-        <input
-          type="text"
-          name="body"
-          id="body"
-          value={data.body}
-          onChange={handleChange}
-        />
         <label htmlFor="recipient_address">Recipient Address: </label>
         <input
           type="text"
@@ -107,7 +69,7 @@ function Notification() {
           onChange={handleChange}
         />
         <button className="btn" type="submit" onClick={handleClick}>
-          Notify
+          Sell
         </button>
       </div>
     </div>
