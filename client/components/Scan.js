@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import ProductBoard from "./ProductBoard";
+import InputBox from "./InputBox";
 const QrReader = dynamic(() => import(`react-weblineindia-qrcode-scanner`), {
   ssr: false,
 });
@@ -41,7 +42,9 @@ function Scan() {
     console.log(data);
   };
 
-  const handleClick = (e) => {};
+  const handleClick = (e) => {
+    setScannedData(data.tokenID)
+  };
 
   const previewStyle = {
     height: 250,
@@ -55,7 +58,7 @@ function Scan() {
   return (
     <>
       <div className="QrMain">
-        {scannedData ? (
+        {!scannedData ? (
           <div className="QrScanner">
             <QrReader
               style={previewStyle}
@@ -71,10 +74,10 @@ function Scan() {
             <ProductBoard scannedData={scannedData} />
           </>
         )}
-        {scannedData ? (
+        {!scannedData ? (
           <div className="input-container" style={{ textAlign: "center" }}>
-            <input
-              type="Number"
+            <InputBox
+              type="number"
               name="tokenID"
               title="Token ID"
               value={data.tokenID}

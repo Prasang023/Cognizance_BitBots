@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Warranty is ERC721, ERC721URIStorage, Ownable {
-
     struct retailer {
         uint256 id;
         address madd;
@@ -30,7 +29,7 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
         product_status status;
         address[] history;
     }
-    enum product_status{
+    enum product_status {
         Pending,
         Sold,
         Active,
@@ -41,9 +40,8 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
     mapping(address => retailer) public retailers;
     uint256 public cid;
 
-
     constructor() ERC721("NFTWarranty", "NFTW") {
-        cid=1;
+        cid = 1;
     }
 
     function safeMint(
@@ -63,7 +61,7 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
         ERC721._burn(tokenId);
     }
 
-    function burnNft (uint256 tokenId) public {
+    function burnNft(uint256 tokenId) public {
         ERC721._burn(tokenId);
     }
 
@@ -74,48 +72,63 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
     }
 
     function addManufacturer() public {
-        manufacturers[msg.sender]=(manufacturer(cid++, msg.sender));
+        manufacturers[msg.sender] = (manufacturer(cid++, msg.sender));
     }
 
     function addRetailer(address _radd) public {
-        if(manufacturers[msg.sender].id!=0){
-            retailers[_radd]=(retailer(cid++,msg.sender,_radd));
+        if (manufacturers[msg.sender].id != 0) {
+            retailers[_radd] = (retailer(cid++, msg.sender, _radd));
         }
     }
 
     function addProduct(
         string memory _title,
-        uint256 _id,
+        // uint256 _id,
         string memory _product_image,
         string memory _desc,
         uint256 _expiry_time
-        ) public {
-        require(_expiry_time > 0, "Warranty period must be greater than 0 months");
-        require(manufacturers[msg.sender].add==msg.sender, "User is not a registered Manufaturer, can't create a product");
-        require(_id == products.length, "wrond product ID");
-        // uint256 _id = products.length
+    ) public returns (uint256) {
+        require(
+            _expiry_time > 0,
+            "Warranty period must be greater than 0 months"
+        );
+        require(
+            manufacturers[msg.sender].add == msg.sender,
+            "User is not a registered Manufaturer, can't create a product"
+        );
+        // require(_id == products.length, "wrond product ID");
+        uint256 _id = products.length;
         uint256 tmp_expiry = 0 + _expiry_time;
         address[] memory emptyAddressList;
-        products.push(product_details({
-            title: _title,
-            id: _id,
-            product_image: _product_image,
-            desc: _desc,
-            activate_time: 0,
-            expiry_time: tmp_expiry,
-            manufacturer: msg.sender,
-            retailer: address(0),
-            customer: address(0),
-            status: product_status.Pending,
-            history: emptyAddressList
-        }));
+        products.push(
+            product_details({
+                title: _title,
+                id: _id,
+                product_image: _product_image,
+                desc: _desc,
+                activate_time: 0,
+                expiry_time: tmp_expiry,
+                manufacturer: msg.sender,
+                retailer: address(0),
+                customer: address(0),
+                status: product_status.Pending,
+                history: emptyAddressList
+            })
+        );
+        return _id;
     }
 
     function sellProduct(uint256 _id, address _customer) public {
         require(_id < products.length, "Product ID not found");
-        require(retailers[msg.sender].madd==products[_id].manufacturer, "Retailer not verified to sell the product");
+        require(
+            retailers[msg.sender].madd == products[_id].manufacturer,
+            "Retailer not verified to sell the product"
+        );
         products[_id].activate_time = block.timestamp;
-        products[_id].expiry_time = block.timestamp + products[_id].expiry_time * 2629800000;
+        products[_id].expiry_time =
+            block.timestamp +
+            products[_id].expiry_time *
+            2629800000;
         products[_id].retailer = msg.sender;
         products[_id].customer = _customer;
         products[_id].status = product_status.Sold;
@@ -124,19 +137,28 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
 
     function activateWarranty(uint256 _id) public {
         require(_id < products.length, "Product ID not found");
-        require(products[_id].customer==msg.sender, "Customer not verified to claim the warranty");
-        require(block.timestamp < products[_id].expiry_time, "Warranty Expired");
+        require(
+            products[_id].customer == msg.sender,
+            "Customer not verified to claim the warranty"
+        );
+        require(
+            block.timestamp < products[_id].expiry_time,
+            "Warranty Expired"
+        );
         products[_id].status = product_status.Active;
     }
 
     function resellProduct(uint256 _id, address to) public {
         require(_id < products.length, "Product ID not found");
-        require(products[_id].customer==msg.sender, "Customer not verified to claim the warranty");
+        require(
+            products[_id].customer == msg.sender,
+            "Customer not verified to claim the warranty"
+        );
         products[_id].customer = to;
         products[_id].history.push(to);
     }
 
-    function transferNFT (uint256 _id, address _to) public {
+    function transferNFT(uint256 _id, address _to) public {
         _transfer(msg.sender, _to, _id);
     }
 
@@ -149,7 +171,7 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
         return products[_id];
     }
 
-    function getProducts() external view returns(product_details[] memory) {
+    function getProducts() external view returns (product_details[] memory) {
         return products;
     }
 
@@ -157,22 +179,22 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
         return products.length;
     }
 
-    function getExpiryTimeById(uint256 tokenId) external view returns (uint256) {
+    function getExpiryTimeById(
+        uint256 tokenId
+    ) external view returns (uint256) {
         return products[tokenId].expiry_time;
     }
 
     function checkActiveStatus(uint256 tokenId) external view returns (bool) {
-        return products[tokenId].status==product_status.Active;
+        return products[tokenId].status == product_status.Active;
     }
 
     function checkUser() external view returns (uint) {
-        if(manufacturers[msg.sender].id!=0){
+        if (manufacturers[msg.sender].id != 0) {
             return 0;
-        }
-        else if(retailers[msg.sender].id!=0){
+        } else if (retailers[msg.sender].id != 0) {
             return 1;
-        }
-        else{
+        } else {
             return 2;
         }
     }
