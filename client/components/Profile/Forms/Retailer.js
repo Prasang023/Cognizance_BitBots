@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Loader";
 import InputBox from "../../InputBox";
+import Error from "@/components/Error";
+import Success from "@/components/Success";
+import { registerRetailer } from "@/redux/slices/manufacturer";
+
+import warrantyABI from "../../../assets/contract_data/warranty.json";
+import warranty_contract_address from "../../../assets/contract_data/warrantyAddress.json";
 
 function Retailer() {
   const dispatch = useDispatch();
@@ -41,6 +47,8 @@ function Retailer() {
         <div className="txt">
           <h1>Register Retailers</h1>
         </div>
+        <Error />
+
         <InputBox
           name="retailerAddress"
           title="Enter Retailer's Address"
@@ -56,6 +64,7 @@ function Retailer() {
           </button>
         </div>
       </div>
+      <Success />
     </div>
   );
 }

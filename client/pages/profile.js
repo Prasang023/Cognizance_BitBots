@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 function profile() {
   const [navItem, setNavItem] = useState(0);
-  const [profile, setProfile] = useState(2);
+  const [profile, setProfile] = useState(0);
   const nav_items = [
     ["Add Retailer", "Add Product"],
     ["Sell Product"],
