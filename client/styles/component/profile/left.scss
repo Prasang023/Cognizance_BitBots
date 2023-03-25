@@ -70,6 +70,26 @@
                 position: absolute;
                 bottom: 0;
             }
+            &.remove{
+                border: none;
+                &:hover{
+                    border: none;
+                }
+                .profile-text-item-box{
+                    text-align: center;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    background-color: $blue;
+                    transition: all 0.3s ease;
+                    &:hover{
+                        background-color: $blue_dark;
+                    }
+                    p{
+                        margin: 0;
+                        color: $white;
+                    }
+                }
+            }
             &:hover{
                 border-left: 2px solid $white;
             }
