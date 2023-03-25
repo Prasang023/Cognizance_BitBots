@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import "@/styles/index.scss";
+// import "../styles/component/layout/mintform.scss";
 import "@/styles/mintform.css";
 import "@rainbow-me/rainbowkit/styles.css";
 

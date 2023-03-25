@@ -19,6 +19,11 @@ function Index() {
   const dispatch = useDispatch();
   const [localLoading, setLocalLoading] = useState(false);
   const [qrImg, setQrImg] = useState(null);
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    image: "",
+  });
   const qrRef = useRef();
   const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDhhQTQzM0RkY2M4QzM5YWJFQzdmNzZDM2REQjlFOTBhMWY3RTk2RjMiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjkxMjcxMDk3NjMsIm5hbWUiOiJsZW5kTmZ0In0.7Zu-wSF34-7GlU5rVIXAvrIczw6MQYT4yV7vOVU9pis`;
   const storage = new Web3Storage({ token: token });
@@ -76,7 +81,7 @@ function Index() {
     };
     id = Number(id.toString());
     console.log("ID added", id);
-    
+
     setLocalLoading(false);
 
     const auth =
@@ -113,6 +118,15 @@ function Index() {
     });
   };
 
+  const qrcode = (
+    <QRCodeCanvas
+      id="qrCode"
+      value={`https://voices.uchicago.edu/201702busn3910001/2018/04/23/pitch-blockchain-in-the-supply-chain/`}
+      size={300}
+      bgColor={"#fff"}
+      level={"H"}
+    />
+  );
   return (
     <div>
       <Layout>

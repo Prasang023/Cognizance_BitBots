@@ -1,7 +1,4 @@
-// import { Canvas } from "@react-three/fiber";
 // import { Inter } from "next/font/google";
-// import { Suspense } from "react";
-// import Three from "@/components/Three";
 import Head from "next/head";
 import Layout from "@/components/Layout";
 import First from "@/components/Frontpages/First";
@@ -23,17 +20,9 @@ export default function Home() {
         <Layout>
           <First />
           <Second />
+          {/* <Form /> */}
         </Layout>
       </div>
-      {/* <Layout>
-        <Canvas id="three-canvas-container">
-          <Suspense fallback={null}>
-            <Three id="three-cont" />
-          </Suspense>
-        </Canvas>
-        <Help />
-        <Notification />
-      </Layout> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-.dwar-navbar-container{
+.dwar-navbar-container {
     width: 90%;
     height: 60px;
     padding: 10px 5%;
@@ -12,39 +12,39 @@
     align-items: center;
     z-index: 100;
 }
-.dwar-logo-container{
+.dwar-logo-container {
     width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     margin: 0 5px;
-    a{
+    a {
         width: fit-content;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        img{
+        img {
             height: 30px;
             width: auto;
         }
     }
 }
-.dwar-element-container{
+.dwar-element-container {
     width: fit-content;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    .dwar-list-container{
+    .dwar-list-container {
         width: fit-content;
         height: fit-content;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0 20px 0 10px;
-        a{
+        a {
             text-decoration: none;
             border: none;
             font-family: $quicks;
@@ -53,18 +53,18 @@
             color: $white;
             font-size: 16px;
             transition: all 0.3s;
-            &:hover{
+            &:hover {
                 color: $blue_dark;
             }
         }
     }
-    .dwar-btn-container{
+    .dwar-btn-container {
         width: fit-content;
         height: fit-content;
         display: flex;
         justify-content: center;
         align-items: center;
-        button{
+        button {
             width: 100px;
             height: 30px;
             border-radius: 20px;
@@ -74,8 +74,99 @@
             border: 2px solid $blue;
             transition: all 0.3s;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 background-color: transparent;
+            }
+        }
+        .dwar-notification {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid $blue_dark;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 20px;
+            cursor: pointer;
+            &:hover {
+                background-color: $blue_dark;
+            }
+        }
+    }
+}
+.dwar-notification-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    // left: 0;
+    z-index: -1000;
+    opacity: 0;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dwar-notification-box{
+        width: 50vw;
+        height: 60vh;
+        background-color: $white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        .dwar-notification-box-close{
+            margin-bottom: 20px;
+            width: 100%;
+            height: 30px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $dark;
+            .icons{
+                cursor: pointer;
+                fill: #00000036;
+                transition: all 0.3s;
+                &:hover{
+                    fill: $dark;
+                }
+            }
+            p{
+                font-size: 16px;
+                color: $dark;
+                padding: 0;
+                margin-left: 30px;
+                font-family: $quicks;
+                color: #00000093;
+                font-weight: 500;
+            }
+        }
+        .dwar-notification-box-list{
+            width: 100%;
+            height: calc(60vh - 50px);
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            .dwar-notification-box-list-item{
+                width: 92%;
+                height: fit-content;
+                padding: 10px;
+                color: $dark;
+                margin: 5px 0;
+                border: 2px solid #3385f929;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                &:hover{
+                    border-color: $blue;
+                    background-color: #3385f929;
+                }
             }
         }
     }

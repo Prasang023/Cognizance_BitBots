@@ -4,7 +4,8 @@ export const checkUser = createAsyncThunk(
   "navbar/checkUser",
   async (_, thunkAPI) => {
     try {
-      const response = await thunkAPI.state.navbar.instances.checkUser();
+      console.log("check User called successfully")
+      const response = await thunkAPI.state.navbar?.instances?.checkUser();
 
       console.log("User: ", response);
 

@@ -14,7 +14,7 @@
 }
 
 .authContainer {
-  height: 80vh;
+  height: 100vh;
   width: 100vw;
   overflow-y: hidden;
   display: flex;
@@ -26,7 +26,8 @@
 .authcenter {
   display: flex;
   flex-direction: column;
-  padding: 40px 60px;
+  margin-top: 50px;
+  padding: 15px 50px;
   background-color: #cccccc;
   border-radius: 15px;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);

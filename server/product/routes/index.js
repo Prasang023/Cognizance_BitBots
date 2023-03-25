@@ -1,6 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
-import { isProductRetailer, productDetails, productManufacture, updateProductStatus } from '../controllers/product.js';
+import { isProductRetailer, productDetails, productManufacture, QRgenerator, updateProductStatus } from '../controllers/product.js';
 
 const router = express.Router();
 
@@ -18,6 +18,10 @@ router.post('/productManufacture', async(req, res) => {
 
 router.put('/updateProductStatus', async(req, res) => {
     updateProductStatus(req, res);
+})
+
+router.get('/qrGenerator', async(req, res) => {
+    QRgenerator(req, res);
 })
 
 export default router;
