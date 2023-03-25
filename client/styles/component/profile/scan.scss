@@ -1,14 +1,81 @@
-.QrMain{
+.QrMain {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
     height: fit-content;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    .QrScanner {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        section {
+            width: 50%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            video {
+                width: 100% !important;
+                height: auto !important;
+                border-radius: 5px;
+            }
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .input-container {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .inputLabel {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            height: fit-content;
+            p {
+                margin-bottom: 5px;
+                color: $font-light;
+                font-family: $poppins;
+                font-size: 16px;
+                font-weight: 400;
+            }
+            input {
+                border: none;
+                outline: none;
+                background-color: $card;
+                color: $font-light;
+            }
+        }
+        button {
+            width: fit-content;
+            height: fit-content;
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background-color: $dark;
+            color: $font-light;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover {
+                color: $white;
+            }
+        }
+    }
 }
 
-.product-detail-box{
+.product-detail-box {
     width: 70%;
     padding: 5% 15%;
     height: fit-content;
@@ -16,47 +83,70 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    .photo{
+    .photo {
         width: 150px;
         height: 150px;
         border: 2px solid $card;
         border-radius: 50%;
         margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px;
+        img{
+            background-position: center;
+            border-radius: 50%;
+        }
     }
-    .box{
+    .box {
         width: 80%;
         height: fit-content;
         display: flex;
         flex-direction: column;
         margin-top: 20px;
-        background-color: #ffffff09;
+        background-color: $card-light;
         border-radius: 5px;
         padding: 20px;
         outline: none;
         border: none;
-        &.button{
+        .inputLabel {
+            width: 100%;
+            height: fit-content;
+            p {
+                font-size: 18px;
+                font-family: $poppins;
+                color: $font-light;
+                font-weight: 500;
+            }
+            input{
+                border: none;
+                outline: none;
+                border-radius: 5px;
+                background-color: $card;
+                color: $font-light;
+            }
+        }
+        &.button {
             cursor: pointer;
             background-color: $dark;
             text-align: center;
-            color: $white;
-            &:hover{
-                p{
+            &:hover {
+                p {
                     color: $white;
                 }
             }
         }
-        p{
+        p {
             font-size: 18px;
             font-family: $poppins;
             color: $font-light;
         }
-        .child{
+        .child {
             width: 100%;
             padding: 5px;
-            // background-color: #ffffff09;
             border-radius: 5px;
             margin: 5px 0;
-            p{
+            p {
                 font-size: 16px;
                 font-weight: 300;
             }
