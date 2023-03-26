@@ -68,7 +68,7 @@ export const getQR = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://13.235.33.126:5000/product/qrGenerator",
+        "http://13.233.173.185:5000/product/qrGenerator",
         data
       )
 
