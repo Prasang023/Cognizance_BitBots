@@ -23,12 +23,20 @@ const statusArray = [
 function ProductBoardGlobal({ scannedData }) {
   console.log("scanned Data: ", scannedData)
   const dispatch = useDispatch()
-  const { userRole } = useSelector((state) => state.navbar)
+  const { userRole, instances } = useSelector((state) => state.navbar)
   const [localLoading, setLocalLoading] = useState(null)
   const [data, setData] = useState({
     recipient_address: ""
   })
+
   if (userRole == 1) Router.push(`/profile`)
+
+  useEffect(() => {
+    const func = async () => {
+      dispatch(getProductDetailsById(scannedData))
+    }
+    if (scannedData && instances) func()
+  }, [scannedData, instances])
 
   // useEffect(() => {
   //   dispatch(getProductDetailsById(scannedData))
@@ -38,10 +46,8 @@ function ProductBoardGlobal({ scannedData }) {
   // const channelAddress = "0x7eff959E7D7fB6b9F3cDA78599966870929A7628"
 
   // const { data: signer } = useSigner(Pkey)
+
   const { productDetail } = useSelector((state) => state.retailer)
-
-  console.log("in v Bhavan", productDetail)
-
 
   const handleChange = (e) => {
     setData({
@@ -55,7 +61,7 @@ function ProductBoardGlobal({ scannedData }) {
   const handleClick = async () => {
     if (data.recipient_address.length == 0) return
     try {
-      dispatch(transferNft({ id: scannedData, to: data.recipient_address }))
+      dispatch(transferNft({ id: scannedData, add: data.recipient_address }))
         .unwrap()
         .then(() => {
           dispatch(
