@@ -174,7 +174,7 @@ const QRgenerator = async (req, res) => {
     const { qrId } = req.body;
 
     try {
-        let qrStr = `https://cognizance-bit-bots-mjmmblu9u-prasang023.vercel.app/product/${qrId}`;
+        let qrStr = `http://localhost:3000/product/${qrId}`;
         let stringdata = JSON.stringify(qrStr);
 
         //getting qr code from the qrdata by calling function
