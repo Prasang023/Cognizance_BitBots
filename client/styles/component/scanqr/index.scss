@@ -1,0 +1,76 @@
+.dwar-scan-main {
+    width: 100%;
+    min-height: calc(100vh - 200px);
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 100px 0;
+    .QrScanner {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        section {
+            width: 50%;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            video {
+                width: 100% !important;
+                height: auto !important;
+                border-radius: 5px;
+            }
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .input-container {
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .inputLabel {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            height: fit-content;
+            p {
+                margin-bottom: 5px;
+                color: $font-light;
+                font-family: $poppins;
+                font-size: 16px;
+                font-weight: 400;
+            }
+            input {
+                border: none;
+                outline: none;
+                background-color: $card;
+                color: $font-light;
+            }
+        }
+        button {
+            width: fit-content;
+            height: fit-content;
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background-color: $card;
+            color: $font-light;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+}

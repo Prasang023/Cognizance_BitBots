@@ -1,0 +1,14 @@
+.dwar-product-main{
+    width: 100vw;
+    min-height: calc(100vh - 200px);
+    height: fit-content;
+    padding: 100px 0;
+    .product-detail-box{
+        .box{
+            background-color: $card;
+            &.button{
+                background-color: $card;
+            }
+        }
+    }
+}

@@ -14,7 +14,7 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
     }
     struct manufacturer {
         uint256 id;
-        address add;
+        address add;    
     }
     struct product_details {
         string title;
@@ -28,10 +28,11 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
         address customer;
         product_status status;
         address[] history;
+        address curr_owner;
     }
     enum product_status {
-        Pending,
-        Sold,
+        Not_Dispatched,
+        Shipped,
         Active,
         Expired
     }
@@ -111,8 +112,9 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
                 manufacturer: msg.sender,
                 retailer: address(0),
                 customer: address(0),
-                status: product_status.Pending,
-                history: emptyAddressList
+                status: product_status.Not_Dispatched,
+                history: emptyAddressList,
+                curr_owner: msg.sender
             })
         );
         return _id;
@@ -131,8 +133,9 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
             2629800000;
         products[_id].retailer = msg.sender;
         products[_id].customer = _customer;
-        products[_id].status = product_status.Sold;
+        products[_id].status = product_status.Active;
         products[_id].history.push(_customer);
+        products[_id].curr_owner=_customer;
     }
 
     function activateWarranty(uint256 _id) public {
@@ -151,11 +154,12 @@ contract Warranty is ERC721, ERC721URIStorage, Ownable {
     function resellProduct(uint256 _id, address to) public {
         require(_id < products.length, "Product ID not found");
         require(
-            products[_id].customer == msg.sender,
-            "Customer not verified to claim the warranty"
+            products[_id].curr_owner == msg.sender,
+            "User is not a current owner of the product"
         );
         products[_id].customer = to;
         products[_id].history.push(to);
+        products[_id].curr_owner = to;
     }
 
     function transferNFT(uint256 _id, address _to) public {
