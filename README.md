@@ -104,10 +104,10 @@ The Contract Address is:
 
 `Frontend` 
 - The frontend of this app is deployed on vercel and valis :
-https://cognizance-bit-bots-e3loedczp-prasang023.vercel.app/
+[https://cognizance-bit-bots-e3loedczp-prasang023.vercel.app/](https://cognizance-bit-bots-32opkfi9b-prasang023.vercel.app/)
 
 `Backend`
-- The Backend of this app is deployed on https://ethhackathonserver.zaidbhimala.repl.co/
+- The Backend of this app is deployed on AWS EC2 instance.
 
 # Future Aspirations for this App
 
