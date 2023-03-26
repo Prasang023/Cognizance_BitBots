@@ -1,41 +1,42 @@
-import { ethers } from "ethers"
-import React, { useState } from "react"
+import { ethers } from "ethers";
+import React, { useState } from "react";
 // import Error from "@/components/Error";
 // import Layout from "@/components/Layout";
 // import Loader from "@/components/Loader";
-import { create } from "ipfs-http-client"
+import { create } from "ipfs-http-client";
 // import Success from "@/components/Success";
 // import InputBox from "@/components/InputBox";
-import { useSelector, useDispatch } from "react-redux"
-import warrantyABI from "../../assets/contract_data/warranty.json"
-import warranty_contract_address from "../../assets/contract_data/warrantyAddress.json"
+import { useSelector, useDispatch } from "react-redux";
+import warrantyABI from "../../assets/contract_data/warranty.json";
+import warranty_contract_address from "../../assets/contract_data/warrantyAddress.json";
 import {
   mintWarrantyNft,
   activateWarranty,
   transferNft,
-  resellProduct
-} from "@/redux/slices/customer"
-import Image from "next/image"
+  resellProduct,
+} from "@/redux/slices/customer";
+import Image from "next/image";
+import { setSuccess } from "@/redux/slices/success";
 
 function Card({ data }) {
-  const dispatch = useDispatch()
-  const { signer } = useSelector((state) => state.navbar)
+  const dispatch = useDispatch();
+  const { signer } = useSelector((state) => state.navbar);
 
   const [info, setInfo] = useState({
-    address: ""
-  })
+    address: "",
+  });
 
-  console.log(data)
+  console.log(data);
   const handleChange = (e) => {
     setInfo({
       ...data,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const activateBtnClick = (token) => {
-    console.log("token", token)
-    var convertedId = parseInt(token._hex, 16)
+    console.log("token", token);
+    var convertedId = parseInt(token._hex, 16);
 
     // let qrNftTx = await instances.safeMint("Token Sent !", data.tokenID);
     // console.log("Mining...", qrNftTx);
@@ -48,27 +49,27 @@ function Card({ data }) {
     // );
     dispatch(mintWarrantyNft({ uri: "Warranty NFT", tokenId: convertedId }))
       .unwrap()
-      .then(() => dispatch(activateWarranty(convertedId, info.address)))
-  }
+      .then(() => dispatch(activateWarranty(convertedId, info.address)));
+  };
 
   const resell = (token) => {
-    var convertedId = parseInt(token._hex, 16)
+    var convertedId = parseInt(token._hex, 16);
     dispatch(transferNft({ id: convertedId, add: info.address }))
       .unwrap()
       .then(() => {
         dispatch(resellProduct({ id: convertedId, to: info.address }))
           .unwrap()
           .then(() => {
-            dispatch(setSuccess("Product sold Successfully!"))
-          })
-      })
-  }
+            dispatch(setSuccess("Product sold Successfully!"));
+          });
+      });
+  };
   const getExpiry = (unix) => {
-    const t= new Date(unix)
-    console.log(t)
-    var d = new Date(0) // The 0 there is the key, which sets the date to the epoch
-    return d.setUTCSeconds(unix)
-  }
+    const t = new Date(unix);
+    console.log(t);
+    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    return d.setUTCSeconds(unix);
+  };
 
   return (
     <div className="card">
@@ -82,7 +83,7 @@ function Card({ data }) {
         <p>Retailer: {data[7]}</p>
         <p>Owner: {data[8]}</p>
 
-        <p>Expires in {(parseInt(data[5]._hex, 16))}</p>
+        <p>Expires in {parseInt(data[5]._hex, 16)}</p>
       </div>
       <div className="btn-box">
         {data[9] == 1 ? (
@@ -101,7 +102,7 @@ function Card({ data }) {
         ) : null}
       </div>
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;
