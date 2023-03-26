@@ -77,6 +77,7 @@ export const resellProduct = createAsyncThunk(
   "customer/resellProduct",
   async (data, thunkAPI) => {
     try {
+      console.log("resell hoga")
       const response = await thunkAPI
         .getState()
         .navbar.instances.resellProduct(data.id, data.to)

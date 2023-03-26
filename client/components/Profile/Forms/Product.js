@@ -114,7 +114,7 @@ function Product() {
     <div className="dwar-form-container">
       {qrData ? (
         <div className="output-qr">
-          <img src={qrData} />
+          <img src={qrData} alt="" />
           <button onClick={downloadPNG}>Download</button>
         </div>
       ) : (
