@@ -58,9 +58,10 @@ export const transferNft = createAsyncThunk(
   "customer/transferNft",
   async (data, thunkAPI) => {
     try {
+      console.log("transfer hoga", data)
       const response = await thunkAPI
         .getState()
-        .navbar.instances.transferNFT(data.id, data.to)
+        .navbar.instances?.transferNFT(data.id, data.add)
 
       console.log("Warranty transfered: ", response)
 
@@ -76,6 +77,7 @@ export const resellProduct = createAsyncThunk(
   "customer/resellProduct",
   async (data, thunkAPI) => {
     try {
+      console.log("resell hoga")
       const response = await thunkAPI
         .getState()
         .navbar.instances.resellProduct(data.id, data.to)

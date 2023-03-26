@@ -91,7 +91,7 @@ animateCircles();
   return (
     <>
       <Head>
-        <title>DWAR</title>
+        <title>DVAL</title>
         <meta name="description" content="Hello this side DWAR App." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

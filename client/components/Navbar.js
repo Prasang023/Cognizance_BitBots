@@ -125,8 +125,7 @@ function Navbar({hide}) {
         <div className="dwar-element-container">
           <div className="dwar-list-container">
             <Link href="/">Home</Link>
-            <Link href="/">Documents</Link>
-            <Link href="/">About</Link>
+            <Link href="/scanqr">Scan</Link>
             <Link href="/">Help & Support</Link>
           </div>
           <div className="dwar-btn-container">

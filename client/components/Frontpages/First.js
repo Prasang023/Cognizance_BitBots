@@ -6,8 +6,8 @@ function First() {
     <div className="dwar-first-page">
       <div className="left">
         <h1>
-          Welcome! to<br></br> <span className="dark-blue">D</span>WAR
-          <span className="dark-blue">.</span> app
+          Welcome! to<br></br> <span className="dark-blue">D</span>VAL
+          <span className="dark-blue">.</span> io
         </h1>
         <p>
           It is an end-to-end decentralized warranty and supply value chain management system by using secure QR codes.

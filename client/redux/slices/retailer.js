@@ -1,15 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { setError } from "./error"
 
-import axios from "axios"
-
 export const getProductDetailsById = createAsyncThunk(
   "retailer/getProductDetailsById",
   async (id, thunkAPI) => {
     try {
+      console.log("chalgya")
       const response = await thunkAPI
         .getState()
-        .navbar?.instances?.getProductDetails(id)
+        .navbar.instances.getProductDetails(id)
 
       console.log("Product Details: ", response)
 

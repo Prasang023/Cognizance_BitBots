@@ -1,49 +1,55 @@
-import Layout from "@/components/Layout";
-import React, { useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import InputBox from "@/components/InputBox";
+import Layout from "@/components/Layout"
+import React, { useRef, useState } from "react"
+import dynamic from "next/dynamic"
+import InputBox from "@/components/InputBox"
+import Router from "next/router"
+import { useDispatch, useSelector } from "react-redux"
 const QrReader = dynamic(() => import(`react-weblineindia-qrcode-scanner`), {
-  ssr: false,
-});
+  ssr: false
+})
 
 function scanqr() {
-  const videoRef = useRef(null);
-  const [isReady, setIsReady] = useState(false);
-  const [scannedData, setScannedData] = useState(null);
-  const [tokenID, setTokenID] = useState("");
+  const videoRef = useRef(null)
+  const [isReady, setIsReady] = useState(false)
+  const [scannedData, setScannedData] = useState(null)
+  const [tokenID, setTokenID] = useState("")
+  const { userRole } = useSelector((state) => state.navbar)
+  if (userRole == 1) Router.push(`/profile`)
 
   const handleLoad = () => {
-    setIsReady(true);
-  };
+    setIsReady(true)
+  }
 
   const [data, setData] = useState({
-    tokenID: "",
-  });
+    tokenID: ""
+  })
 
   const handleDetected = (data) => {
-    setScannedData(data);
-    console.log(`Scanned Data: ${data}`);
+    // setScannedData(data)
+    // console.log(`Scanned Data: ${data}`)
     if (videoRef.current && isReady) {
       videoRef.current.play().catch((error) => {
-        console.error("Error starting scanner:", error);
-      });
+        console.error("Error starting scanner:", error)
+      })
     }
     videoRef.current &&
       videoRef.current.video &&
-      console.log(`Video width: ${videoRef.current.video.videoWidth}`);
-  };
+      console.log(`Video width: ${videoRef.current.video.videoWidth}`)
+  }
 
   const handleChange = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value,
-    });
-    console.log(data);
-  };
+      [e.target.name]: e.target.value
+    })
+    console.log(data)
+  }
 
   const handleClick = (e) => {
-    setScannedData(data.tokenID);
-  };
+    setScannedData(data.tokenID)
+    Router.push(`/product/${data.tokenID}`)
+  }
+
   return (
     <Layout>
       <div className="dwar-scan-main">
@@ -53,7 +59,7 @@ function scanqr() {
             onScan={handleDetected}
             onLoad={handleLoad}
             onError={(e) => {
-              console.error(e.message);
+              console.error(e.message)
             }}
           />
         </div>
@@ -72,7 +78,7 @@ function scanqr() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }
 
-export default scanqr;
+export default scanqr
