@@ -12,7 +12,7 @@ import warranty_contract_address from "../../assets/contract_data/warrantyAddres
 
 function Card({ data }) {
   console.log(data);
-  const { signer } = useSelector((state) => state.navbar);
+  const { signer, instances } = useSelector((state) => state.navbar);
 
   // const [data, setData] = useState({
   //   toAddress: "",
