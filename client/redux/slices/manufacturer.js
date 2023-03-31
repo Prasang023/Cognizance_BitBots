@@ -68,7 +68,7 @@ export const getQR = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_ENDPOINT}/product/qrGenerator`,
+        `https://cognizance-bit-bots-backend.vercel.app/product/qrGenerator`,
         data
       );
 
