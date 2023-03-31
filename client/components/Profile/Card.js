@@ -90,7 +90,7 @@ function Card({ data }) {
           <button onClick={() => activateBtnClick(data[1])}>Activate</button>
         ) : null}
         {data[9] == 2 ? (
-          <>
+          <div className="btn-box-col">
             <input
               type="text"
               name="address"
@@ -98,7 +98,7 @@ function Card({ data }) {
               onChange={handleChange}
             />
             <button onClick={() => resell(data[1])}>Resell</button>
-          </>
+          </div>
         ) : null}
       </div>
     </div>
