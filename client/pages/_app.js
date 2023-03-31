@@ -5,7 +5,7 @@ import "@/styles/mintform.css";
 import "@rainbow-me/rainbowkit/styles.css";
 
 import { wrapper } from "../redux/store";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider, midnightTheme } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
@@ -32,7 +32,7 @@ const wagmiClient = createClient({
 function App({ Component, pageProps }) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider theme={midnightTheme()} chains={chains}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
