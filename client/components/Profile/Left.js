@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { checkUser } from "@/redux/navbar"
 import { FaRegBell, FaRegTimesCircle } from "react-icons/fa"
 import Loader from "../Loader"
+import { setSuccess } from "@/redux/slices/success"
 
 function Left({ setNavItem, navItem, profile, nav_items, profs }) {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
     dispatch(registerManufacturer())
       .unwrap()
       .then((res) => {
+        dispatch(setSuccess("Successfully Added!"))
         dispatch(checkUser(instances))
       })
   }
@@ -61,7 +63,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
             </div>
           </div>
           {nav_items[profile].map((e, index) => {
-            if (profile == 2 && index == 3) {
+            if (profile == 2 && index == 1) {
               return (
                 <div
                   className="profile-text-box remove"
@@ -83,7 +85,7 @@ function Left({ setNavItem, navItem, profile, nav_items, profs }) {
                       dispatch(clearData())
                     }
                     document
-                      .getElementById(`profile-text-box-${navItem}`)
+                      ?.getElementById(`profile-text-box-${navItem}`)
                       .classList.remove("active")
                     setNavItem(index)
                     document
